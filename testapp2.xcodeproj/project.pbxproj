@@ -14,6 +14,12 @@
 		76631E841DE7B9F20065EE50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */; };
 		76631E8F1DE7B9F20065EE50 /* testapp2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */; };
 		76631E9A1DE7B9F20065EE50 /* testapp2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E991DE7B9F20065EE50 /* testapp2UITests.swift */; };
+		76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */; };
+		76631EAA1DE8595B0065EE50 /* CustomOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */; };
+		76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAB1DE859780065EE50 /* CustomOverlayView.swift */; };
+		76631EAE1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */; };
+		76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */; };
+		766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		76631E951DE7B9F20065EE50 /* testapp2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testapp2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E991DE7B9F20065EE50 /* testapp2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testapp2UITests.swift; sourceTree = "<group>"; };
 		76631E9B1DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
+		76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayViewController.xib; sourceTree = "<group>"; };
+		76631EAB1DE859780065EE50 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
+		76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildTimeLapseViewController.swift; sourceTree = "<group>"; };
+		76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLapseBuilder.swift; sourceTree = "<group>"; };
+		766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterTimeLapseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +89,9 @@
 		76631E6D1DE7B9F20065EE50 = {
 			isa = PBXGroup;
 			children = (
+				76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */,
+				76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */,
+				76631EAB1DE859780065EE50 /* CustomOverlayView.swift */,
 				76631E781DE7B9F20065EE50 /* testapp2 */,
 				76631E8D1DE7B9F20065EE50 /* testapp2Tests */,
 				76631E981DE7B9F20065EE50 /* testapp2UITests */,
@@ -100,6 +115,9 @@
 				76631E791DE7B9F20065EE50 /* AppDelegate.swift */,
 				76631E7B1DE7B9F20065EE50 /* ViewController.swift */,
 				76631E7D1DE7B9F20065EE50 /* Main.storyboard */,
+				766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */,
+				76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */,
+				76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */,
 				76631E801DE7B9F20065EE50 /* Assets.xcassets */,
 				76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */,
 				76631E851DE7B9F20065EE50 /* Info.plist */,
@@ -193,6 +211,7 @@
 				TargetAttributes = {
 					76631E751DE7B9F20065EE50 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = DC9N7Q7363;
 						ProvisioningStyle = Automatic;
 					};
 					76631E891DE7B9F20065EE50 = {
@@ -232,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76631EAA1DE8595B0065EE50 /* CustomOverlayViewController.xib in Resources */,
 				76631E841DE7B9F20065EE50 /* LaunchScreen.storyboard in Resources */,
 				76631E811DE7B9F20065EE50 /* Assets.xcassets in Resources */,
 				76631E7F1DE7B9F20065EE50 /* Main.storyboard in Resources */,
@@ -259,7 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */,
+				76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */,
+				76631EAE1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift in Sources */,
 				76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */,
+				766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */,
+				76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */,
 				76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DC9N7Q7363;
 				INFOPLIST_FILE = testapp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2";
@@ -424,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DC9N7Q7363;
 				INFOPLIST_FILE = testapp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2";
@@ -505,6 +532,7 @@
 				76631EA01DE7B9F20065EE50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76631EA11DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2Tests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +541,7 @@
 				76631EA31DE7B9F20065EE50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76631EA41DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2UITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +550,7 @@
 				76631EA61DE7B9F20065EE50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
