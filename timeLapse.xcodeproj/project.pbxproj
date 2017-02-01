@@ -12,8 +12,8 @@
 		76631E7F1DE7B9F20065EE50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E7D1DE7B9F20065EE50 /* Main.storyboard */; };
 		76631E811DE7B9F20065EE50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76631E801DE7B9F20065EE50 /* Assets.xcassets */; };
 		76631E841DE7B9F20065EE50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */; };
-		76631E8F1DE7B9F20065EE50 /* testapp2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */; };
-		76631E9A1DE7B9F20065EE50 /* testapp2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E991DE7B9F20065EE50 /* testapp2UITests.swift */; };
+		76631E8F1DE7B9F20065EE50 /* timeLapseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E8E1DE7B9F20065EE50 /* timeLapseTests.swift */; };
+		76631E9A1DE7B9F20065EE50 /* timeLapseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E991DE7B9F20065EE50 /* timeLapseUITests.swift */; };
 		76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */; };
 		76631EAA1DE8595B0065EE50 /* CustomOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */; };
 		76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAB1DE859780065EE50 /* CustomOverlayView.swift */; };
@@ -48,10 +48,10 @@
 		76631E831DE7B9F20065EE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76631E851DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76631E8A1DE7B9F20065EE50 /* timeLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testapp2Tests.swift; sourceTree = "<group>"; };
+		76631E8E1DE7B9F20065EE50 /* timeLapseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeLapseTests.swift; sourceTree = "<group>"; };
 		76631E901DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76631E951DE7B9F20065EE50 /* timeLapseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeLapseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76631E991DE7B9F20065EE50 /* testapp2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testapp2UITests.swift; sourceTree = "<group>"; };
+		76631E991DE7B9F20065EE50 /* timeLapseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeLapseUITests.swift; sourceTree = "<group>"; };
 		76631E9B1DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
 		76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayViewController.xib; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		76631E8D1DE7B9F20065EE50 /* timeLapseTests */ = {
 			isa = PBXGroup;
 			children = (
-				76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */,
+				76631E8E1DE7B9F20065EE50 /* timeLapseTests.swift */,
 				76631E901DE7B9F20065EE50 /* Info.plist */,
 			);
 			name = timeLapseTests;
@@ -139,7 +139,7 @@
 		76631E981DE7B9F20065EE50 /* timeLapseUITests */ = {
 			isa = PBXGroup;
 			children = (
-				76631E991DE7B9F20065EE50 /* testapp2UITests.swift */,
+				76631E991DE7B9F20065EE50 /* timeLapseUITests.swift */,
 				76631E9B1DE7B9F20065EE50 /* Info.plist */,
 			);
 			name = timeLapseUITests;
@@ -296,7 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76631E8F1DE7B9F20065EE50 /* testapp2Tests.swift in Sources */,
+				76631E8F1DE7B9F20065EE50 /* timeLapseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76631E9A1DE7B9F20065EE50 /* testapp2UITests.swift in Sources */,
+				76631E9A1DE7B9F20065EE50 /* timeLapseUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
