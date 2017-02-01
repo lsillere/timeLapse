@@ -40,17 +40,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		76631E761DE7B9F20065EE50 /* testapp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testapp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76631E761DE7B9F20065EE50 /* timeLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E791DE7B9F20065EE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76631E7B1DE7B9F20065EE50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		76631E7E1DE7B9F20065EE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76631E801DE7B9F20065EE50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76631E831DE7B9F20065EE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76631E851DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76631E8A1DE7B9F20065EE50 /* testapp2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testapp2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76631E8A1DE7B9F20065EE50 /* timeLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testapp2Tests.swift; sourceTree = "<group>"; };
 		76631E901DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76631E951DE7B9F20065EE50 /* testapp2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testapp2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76631E951DE7B9F20065EE50 /* timeLapseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = timeLapseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E991DE7B9F20065EE50 /* testapp2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testapp2UITests.swift; sourceTree = "<group>"; };
 		76631E9B1DE7B9F20065EE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
@@ -102,9 +102,9 @@
 		76631E771DE7B9F20065EE50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76631E761DE7B9F20065EE50 /* testapp2.app */,
-				76631E8A1DE7B9F20065EE50 /* testapp2Tests.xctest */,
-				76631E951DE7B9F20065EE50 /* testapp2UITests.xctest */,
+				76631E761DE7B9F20065EE50 /* timeLapse.app */,
+				76631E8A1DE7B9F20065EE50 /* timeLapseTests.xctest */,
+				76631E951DE7B9F20065EE50 /* timeLapseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		76631E751DE7B9F20065EE50 /* testapp2 */ = {
+		76631E751DE7B9F20065EE50 /* timeLapse */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76631E9E1DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2" */;
+			buildConfigurationList = 76631E9E1DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapse" */;
 			buildPhases = (
 				76631E721DE7B9F20065EE50 /* Sources */,
 				76631E731DE7B9F20065EE50 /* Frameworks */,
@@ -158,14 +158,14 @@
 			);
 			dependencies = (
 			);
-			name = testapp2;
+			name = timeLapse;
 			productName = testapp2;
-			productReference = 76631E761DE7B9F20065EE50 /* testapp2.app */;
+			productReference = 76631E761DE7B9F20065EE50 /* timeLapse.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76631E891DE7B9F20065EE50 /* testapp2Tests */ = {
+		76631E891DE7B9F20065EE50 /* timeLapseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76631EA11DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2Tests" */;
+			buildConfigurationList = 76631EA11DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapseTests" */;
 			buildPhases = (
 				76631E861DE7B9F20065EE50 /* Sources */,
 				76631E871DE7B9F20065EE50 /* Frameworks */,
@@ -176,14 +176,14 @@
 			dependencies = (
 				76631E8C1DE7B9F20065EE50 /* PBXTargetDependency */,
 			);
-			name = testapp2Tests;
+			name = timeLapseTests;
 			productName = testapp2Tests;
-			productReference = 76631E8A1DE7B9F20065EE50 /* testapp2Tests.xctest */;
+			productReference = 76631E8A1DE7B9F20065EE50 /* timeLapseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		76631E941DE7B9F20065EE50 /* testapp2UITests */ = {
+		76631E941DE7B9F20065EE50 /* timeLapseUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76631EA41DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2UITests" */;
+			buildConfigurationList = 76631EA41DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapseUITests" */;
 			buildPhases = (
 				76631E911DE7B9F20065EE50 /* Sources */,
 				76631E921DE7B9F20065EE50 /* Frameworks */,
@@ -194,9 +194,9 @@
 			dependencies = (
 				76631E971DE7B9F20065EE50 /* PBXTargetDependency */,
 			);
-			name = testapp2UITests;
+			name = timeLapseUITests;
 			productName = testapp2UITests;
-			productReference = 76631E951DE7B9F20065EE50 /* testapp2UITests.xctest */;
+			productReference = 76631E951DE7B9F20065EE50 /* timeLapseUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -226,7 +226,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 76631E711DE7B9F20065EE50 /* Build configuration list for PBXProject "testapp2" */;
+			buildConfigurationList = 76631E711DE7B9F20065EE50 /* Build configuration list for PBXProject "timeLapse" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -239,9 +239,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				76631E751DE7B9F20065EE50 /* testapp2 */,
-				76631E891DE7B9F20065EE50 /* testapp2Tests */,
-				76631E941DE7B9F20065EE50 /* testapp2UITests */,
+				76631E751DE7B9F20065EE50 /* timeLapse */,
+				76631E891DE7B9F20065EE50 /* timeLapseTests */,
+				76631E941DE7B9F20065EE50 /* timeLapseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -310,12 +310,12 @@
 /* Begin PBXTargetDependency section */
 		76631E8C1DE7B9F20065EE50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76631E751DE7B9F20065EE50 /* testapp2 */;
+			target = 76631E751DE7B9F20065EE50 /* timeLapse */;
 			targetProxy = 76631E8B1DE7B9F20065EE50 /* PBXContainerItemProxy */;
 		};
 		76631E971DE7B9F20065EE50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76631E751DE7B9F20065EE50 /* testapp2 */;
+			target = 76631E751DE7B9F20065EE50 /* timeLapse */;
 			targetProxy = 76631E961DE7B9F20065EE50 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -469,7 +469,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testapp2.app/testapp2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timeLapse.app/timeLapse";
 			};
 			name = Debug;
 		};
@@ -483,7 +483,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testapp2.app/testapp2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/timeLapse.app/timeLapse";
 			};
 			name = Release;
 		};
@@ -516,7 +516,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		76631E711DE7B9F20065EE50 /* Build configuration list for PBXProject "testapp2" */ = {
+		76631E711DE7B9F20065EE50 /* Build configuration list for PBXProject "timeLapse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76631E9C1DE7B9F20065EE50 /* Debug */,
@@ -525,7 +525,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76631E9E1DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2" */ = {
+		76631E9E1DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76631E9F1DE7B9F20065EE50 /* Debug */,
@@ -534,7 +534,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76631EA11DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2Tests" */ = {
+		76631EA11DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76631EA21DE7B9F20065EE50 /* Debug */,
@@ -543,7 +543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76631EA41DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "testapp2UITests" */ = {
+		76631EA41DE7B9F20065EE50 /* Build configuration list for PBXNativeTarget "timeLapseUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76631EA51DE7B9F20065EE50 /* Debug */,

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "76631E751DE7B9F20065EE50"
-               BuildableName = "testapp2.app"
-               BlueprintName = "testapp2"
-               ReferencedContainer = "container:testapp2.xcodeproj">
+               BuildableName = "timeLapse.app"
+               BlueprintName = "timeLapse"
+               ReferencedContainer = "container:timeLapse.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "76631E891DE7B9F20065EE50"
-               BuildableName = "testapp2Tests.xctest"
-               BlueprintName = "testapp2Tests"
-               ReferencedContainer = "container:testapp2.xcodeproj">
+               BuildableName = "timeLapseTests.xctest"
+               BlueprintName = "timeLapseTests"
+               ReferencedContainer = "container:timeLapse.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "76631E941DE7B9F20065EE50"
-               BuildableName = "testapp2UITests.xctest"
-               BlueprintName = "testapp2UITests"
-               ReferencedContainer = "container:testapp2.xcodeproj">
+               BuildableName = "timeLapseUITests.xctest"
+               BlueprintName = "timeLapseUITests"
+               ReferencedContainer = "container:timeLapse.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76631E751DE7B9F20065EE50"
-            BuildableName = "testapp2.app"
-            BlueprintName = "testapp2"
-            ReferencedContainer = "container:testapp2.xcodeproj">
+            BuildableName = "timeLapse.app"
+            BlueprintName = "timeLapse"
+            ReferencedContainer = "container:timeLapse.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76631E751DE7B9F20065EE50"
-            BuildableName = "testapp2.app"
-            BlueprintName = "testapp2"
-            ReferencedContainer = "container:testapp2.xcodeproj">
+            BuildableName = "timeLapse.app"
+            BlueprintName = "timeLapse"
+            ReferencedContainer = "container:timeLapse.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "76631E751DE7B9F20065EE50"
-            BuildableName = "testapp2.app"
-            BlueprintName = "testapp2"
-            ReferencedContainer = "container:testapp2.xcodeproj">
+            BuildableName = "timeLapse.app"
+            BlueprintName = "timeLapse"
+            ReferencedContainer = "container:timeLapse.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

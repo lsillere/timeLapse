@@ -51,7 +51,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
     }
     
-    // Test afichage image et taille - à retirer avan soumission
+    // Test afichage image et taille - à retirer avant soumission
     @IBAction func testAction(_ sender: Any) {
         let dataNew = FileManager.default.contents(atPath: imagePath[cpt])
         let imageTest = UIImage(data: dataNew!)
@@ -100,7 +100,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 }
                 /*dispatch_get_main_queue().asynchronously(execute: {
                     let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                    //progressHUD.setProgress(progressPercentage, animated: true)
+                    progressHUD.setProgress(progressPercentage, animated: true)
                 })*/
         },
             success: { url in
