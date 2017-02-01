@@ -92,9 +92,9 @@
 				76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */,
 				76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */,
 				76631EAB1DE859780065EE50 /* CustomOverlayView.swift */,
-				76631E781DE7B9F20065EE50 /* testapp2 */,
-				76631E8D1DE7B9F20065EE50 /* testapp2Tests */,
-				76631E981DE7B9F20065EE50 /* testapp2UITests */,
+				76631E781DE7B9F20065EE50 /* timeLapse */,
+				76631E8D1DE7B9F20065EE50 /* timeLapseTests */,
+				76631E981DE7B9F20065EE50 /* timeLapseUITests */,
 				76631E771DE7B9F20065EE50 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,7 +109,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		76631E781DE7B9F20065EE50 /* testapp2 */ = {
+		76631E781DE7B9F20065EE50 /* timeLapse */ = {
 			isa = PBXGroup;
 			children = (
 				76631E791DE7B9F20065EE50 /* AppDelegate.swift */,
@@ -122,24 +122,27 @@
 				76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */,
 				76631E851DE7B9F20065EE50 /* Info.plist */,
 			);
+			name = timeLapse;
 			path = testapp2;
 			sourceTree = "<group>";
 		};
-		76631E8D1DE7B9F20065EE50 /* testapp2Tests */ = {
+		76631E8D1DE7B9F20065EE50 /* timeLapseTests */ = {
 			isa = PBXGroup;
 			children = (
 				76631E8E1DE7B9F20065EE50 /* testapp2Tests.swift */,
 				76631E901DE7B9F20065EE50 /* Info.plist */,
 			);
+			name = timeLapseTests;
 			path = testapp2Tests;
 			sourceTree = "<group>";
 		};
-		76631E981DE7B9F20065EE50 /* testapp2UITests */ = {
+		76631E981DE7B9F20065EE50 /* timeLapseUITests */ = {
 			isa = PBXGroup;
 			children = (
 				76631E991DE7B9F20065EE50 /* testapp2UITests.swift */,
 				76631E9B1DE7B9F20065EE50 /* Info.plist */,
 			);
+			name = timeLapseUITests;
 			path = testapp2UITests;
 			sourceTree = "<group>";
 		};
@@ -440,7 +443,7 @@
 				DEVELOPMENT_TEAM = DC9N7Q7363;
 				INFOPLIST_FILE = testapp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2";
+				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.timeLapse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -453,7 +456,7 @@
 				DEVELOPMENT_TEAM = DC9N7Q7363;
 				INFOPLIST_FILE = testapp2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.testapp2";
+				PRODUCT_BUNDLE_IDENTIFIER = "Loic-Sillere.timeLapse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
