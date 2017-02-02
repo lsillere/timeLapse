@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD0081E43AD3E0083E1EE /* Settings.swift */; };
 		76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E791DE7B9F20065EE50 /* AppDelegate.swift */; };
 		76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E7B1DE7B9F20065EE50 /* ViewController.swift */; };
 		76631E7F1DE7B9F20065EE50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E7D1DE7B9F20065EE50 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		764CD0081E43AD3E0083E1EE /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		76631E761DE7B9F20065EE50 /* timeLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E791DE7B9F20065EE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76631E7B1DE7B9F20065EE50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		764CD0071E43A4900083E1EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				764CD0081E43AD3E0083E1EE /* Settings.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		76631E6D1DE7B9F20065EE50 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +131,7 @@
 				76631E801DE7B9F20065EE50 /* Assets.xcassets */,
 				76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */,
 				76631E851DE7B9F20065EE50 /* Info.plist */,
+				764CD0071E43A4900083E1EE /* Model */,
 			);
 			path = timeLapse;
 			sourceTree = "<group>";
@@ -281,6 +292,7 @@
 			files = (
 				76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */,
 				76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */,
+				764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */,
 				76631EAE1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift in Sources */,
 				76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */,
 				766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */,

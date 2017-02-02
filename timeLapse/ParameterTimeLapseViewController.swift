@@ -8,10 +8,15 @@
 
 import UIKit
 
-class ParameterTimeLapseViewController: UIViewController {
+class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var videoQuality:String = ""
-    var interval:String = "" // interval betwenn 2 pictures which drive vitess of the video
+    @IBOutlet weak var parameterTableView: UITableView!
+    
+    let parameterItemTitle = ["1", "2"]
+    let parameterItem = ["plop", "test", "a", "b"]
+    /*var videoQuality:String = ""
+    var interval:String = "" // interval betwenn 2 pictures which drive vitess of the video*/
+    let settings = Settings()
     
     let defaults: UserDefaults = UserDefaults.standard
     
@@ -19,8 +24,20 @@ class ParameterTimeLapseViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func segmentedControlAction(_ sender: Any) {
-        // TO IMPROVE
-        if(segmentedControl.selectedSegmentIndex == 0) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            settings.videoQuality = "480p"
+        case 1:
+            settings.videoQuality = "720p"
+        case 2:
+            settings.videoQuality = "1080p"
+        default:
+            settings.videoQuality = ""
+        }
+        settings.saveData()
+        //settings.setVideoQuality(videoQuality: videoQuality)
+        
+        /*if(segmentedControl.selectedSegmentIndex == 0) {
             print("First Segment Selected")
             videoQuality = "480p"
         }
@@ -32,13 +49,25 @@ class ParameterTimeLapseViewController: UIViewController {
             print("Third Segment Selected")
             videoQuality = "1080p"
         }
+        
         saveData(value: videoQuality, key: "videoQuality")
-        //getData()
+        getData()*/
     }
     
     @IBAction func vitessSegmentedControll(_ sender: Any) {
-        // TO IMPROVE
-        if(vitessSegmentedControll.selectedSegmentIndex == 0) {
+        switch vitessSegmentedControll.selectedSegmentIndex {
+        case 0:
+            settings.interval = "8"
+        case 1:
+            settings.interval = "5"
+        case 2:
+            settings.interval = "1"
+        default:
+            settings.interval = ""
+        }
+        settings.saveData()
+        
+        /*if(vitessSegmentedControll.selectedSegmentIndex == 0) {
             print("Slow Vitess")
             interval = "8"
         }
@@ -50,23 +79,26 @@ class ParameterTimeLapseViewController: UIViewController {
             print("Fast Vitess")
             interval = "1"
         }
-        saveData(value: interval, key: "interval")
+        saveData(value: interval, key: "interval")*/
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
-        if(videoQuality == "480p") {
+        /*getData()
+        videoQuality = settings.videoQuality
+        interval = settings.interval*/
+        
+        if(settings.videoQuality == "480p") {
             segmentedControl.selectedSegmentIndex = 0
-        } else if(videoQuality == "1080p") {
+        } else if(settings.videoQuality == "1080p") {
             segmentedControl.selectedSegmentIndex = 2
         } else { // Defaul value 720p
             segmentedControl.selectedSegmentIndex = 1
         }
         
-        if(interval == "5") {
+        if(settings.interval == "5") {
             vitessSegmentedControll.selectedSegmentIndex = 1
-        } else if(interval == "8") {
+        } else if(settings.interval == "8") {
             vitessSegmentedControll.selectedSegmentIndex = 0
         } else { // Defaul value 1s
             vitessSegmentedControll.selectedSegmentIndex = 2
@@ -91,7 +123,7 @@ class ParameterTimeLapseViewController: UIViewController {
         defaults.set(value, forKey: key)
         defaults.synchronize()
     }
-    
+    /*
     func getData() {
         if let videoValue = defaults.string(forKey: "videoQuality") {
             videoQuality = videoValue
@@ -102,7 +134,29 @@ class ParameterTimeLapseViewController: UIViewController {
             interval = intervalValue
             print("Video interval : ", interval)
         }
+    }*/
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return parameterItemTitle.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("test")
+
+        let cell = parameterTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = parameterItem[indexPath.row]
+        print("test")
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2;
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Section \(section)"
+    }
+
     /*
     // MARK: - Navigation
 
