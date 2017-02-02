@@ -9,7 +9,7 @@
 import UIKit
 
 class Settings {
-    var interval: String
+    var interval: String // interval in second between 2 pictures taken
     var videoQuality: String
     
     // Get var values from userdefault or set default values

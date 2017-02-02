@@ -23,6 +23,17 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var vitessSegmentedControll: UISegmentedControl!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    
+    @IBAction func githubLink(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "http://github.com/lsillere")! as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func sendFeedback(_ sender: Any) {
+        let email = "loic.sillere@gmail.com"
+        let url = NSURL(string: "mailto:\(email)")
+        UIApplication.shared.open(url as! URL, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func segmentedControlAction(_ sender: Any) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -88,23 +99,38 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
         videoQuality = settings.videoQuality
         interval = settings.interval*/
         
-        if(settings.videoQuality == "480p") {
+        switch settings.videoQuality {
+        case "480p":
+            segmentedControl.selectedSegmentIndex = 0
+        case "1080p":
+            segmentedControl.selectedSegmentIndex = 2
+        default:
+            segmentedControl.selectedSegmentIndex = 1
+        }
+        /*if(settings.videoQuality == "480p") {
             segmentedControl.selectedSegmentIndex = 0
         } else if(settings.videoQuality == "1080p") {
             segmentedControl.selectedSegmentIndex = 2
         } else { // Defaul value 720p
             segmentedControl.selectedSegmentIndex = 1
+        }*/
+        
+        switch settings.interval {
+        case "5":
+            vitessSegmentedControll.selectedSegmentIndex = 1
+        case "8":
+            vitessSegmentedControll.selectedSegmentIndex = 0
+        default:
+            vitessSegmentedControll.selectedSegmentIndex = 2
         }
         
-        if(settings.interval == "5") {
+        /*if(settings.interval == "5") {
             vitessSegmentedControll.selectedSegmentIndex = 1
         } else if(settings.interval == "8") {
             vitessSegmentedControll.selectedSegmentIndex = 0
         } else { // Defaul value 1s
             vitessSegmentedControll.selectedSegmentIndex = 2
-        }
-
-        // Do any additional setup after loading the view.
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
