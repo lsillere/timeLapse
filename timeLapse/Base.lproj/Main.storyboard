@@ -23,8 +23,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UiA-sH-XD2">
-                                <rect key="frame" x="0.0" y="57" width="375" height="566"/>
+                                <rect key="frame" x="0.0" y="57" width="375" height="292"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpJ-WB-4Ft">
                                 <rect key="frame" x="47" y="585" width="46" height="30"/>
@@ -94,6 +95,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="k75-8b-Vap" appends="YES" id="jKS-ei-JRy"/>
+                            <outletCollection property="gestureRecognizers" destination="kyR-nb-34E" appends="YES" id="NvM-99-DrU"/>
+                        </connections>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="camera" id="Hhw-R6-S8q"/>
@@ -108,6 +114,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="k75-8b-Vap">
+                    <connections>
+                        <segue destination="QrC-Vl-a4H" kind="show" id="2XL-b1-6Q4"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="kyR-nb-34E">
+                    <connections>
+                        <action selector="swipeToCamera:" destination="BYZ-38-t0r" id="mEu-Qi-ae8"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="972" y="37.331334332833585"/>
         </scene>
@@ -272,6 +288,29 @@
             <point key="canvasLocation" x="2005.5999999999999" y="36.431784107946029"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="tUZ-Fb-eng">
+            <objects>
+                <viewController id="8Jz-2B-OAG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tsq-zL-WmW"/>
+                        <viewControllerLayoutGuide type="bottom" id="olL-qR-l7F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FTd-dA-qdU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="2iO-db-r1J" appends="YES" id="v8I-4r-F21"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wpP-Ye-tkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="2iO-db-r1J"/>
+            </objects>
+            <point key="canvasLocation" x="1579" y="856"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="Jgl-0L-nSt">
             <objects>
                 <viewController id="Ynr-n4-Y6G" sceneMemberID="viewController">
@@ -364,5 +403,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="x1O-tn-Ah7"/>
+        <segue reference="2XL-b1-6Q4"/>
     </inferredMetricsTieBreakers>
 </document>

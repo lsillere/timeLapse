@@ -11,22 +11,36 @@ import UIKit
 protocol CustomOverlayDelegate{
     func didCancel(overlayView:CustomOverlayView)
     func didShoot(overlayView:CustomOverlayView)
+    func didStop(overlayView:CustomOverlayView)
 }
 
 class CustomOverlayView: UIView {
     @IBOutlet weak var shootButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     
     var delegate:CustomOverlayDelegate! = nil
     
     @IBOutlet weak var cameraLabel: UILabel!
+    
     @IBAction func shootButton(_ sender: UIButton) {
         //cameraLabel.text = "Even Cooler Camera"
         delegate.didShoot(overlayView: self)
         self.shootButton.isEnabled = false
+        self.shootButton.isHidden = true
+        self.stopButton.isEnabled = true
+        self.stopButton.isHidden = false
     }
+    
     @IBAction func cancelButton(_ sender: UIButton) {
-        cameraLabel.text = "I want to exit"
         delegate.didCancel(overlayView: self)
+    }
+    
+    @IBAction func stopButton(_ sender: UIButton) {
+        delegate.didStop(overlayView: self)
+        self.stopButton.isEnabled = false
+        self.stopButton.isHidden = true
+        self.shootButton.isEnabled = true
+        self.shootButton.isHidden = false
     }
     
     /*

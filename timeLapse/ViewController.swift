@@ -143,7 +143,48 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         //UISaveVideoAtPathToSavedPhotosAlbum(videoOutputPath as String, self, "savingCallBack:didFinishSavingWithError:contextInfo:", nil)
     }
     
-    @IBAction func takePhoto(_ sender: Any) {
+    // Swipe to customOverlayView to present camera
+    @IBAction func swipeToCamera(_ sender: Any) {
+        print("swipe to camera")
+        if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
+            imagePicker =  UIImagePickerController()
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.delegate = self
+            imagePicker.showsCameraControls = false
+            
+            let customViewController = CustomOverlayViewController(
+                nibName:"CustomOverlayViewController",
+                bundle: nil
+            )
+            self.customView = customViewController.view as! CustomOverlayView
+            self.customView.frame = self.imagePicker.view.frame
+            //customView.cameraLabel.text = "Hello Camera"
+            self.customView.delegate = self
+            
+            present(imagePicker, animated: true, completion: {
+                self.imagePicker.cameraOverlayView = self.customView
+            })
+            //present(imagePicker, animated: true, completion: nil) // Caméra classique
+        }
+        else { //no camera found -- alert the user.
+            let alertVC = UIAlertController(
+                title: "No Camera",
+                message: "Sorry, this device has no camera",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "OK",
+                style:.default,
+                handler: nil)
+            alertVC.addAction(okAction)
+            present(
+                alertVC,
+                animated: true,
+                completion: nil)
+        }
+    }
+    
+    
+    @IBAction func takePhoto(_ sender: Any) { // Part vers la caméra
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             imagePicker =  UIImagePickerController()
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera
@@ -278,6 +319,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     
     func didShoot(overlayView:CustomOverlayView) {
+        print("Start capture")
         var interval: TimeInterval
         if let intervalValue = UserDefaults.standard.string(forKey: "interval") {
             interval = TimeInterval(intervalValue)!
@@ -287,6 +329,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         print("Video interval : ", interval)
         updateCounter()
         timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+    }
+    
+    func didStop(overlayView:CustomOverlayView) {
+        print("Stop capture")
+        timer.invalidate()
     }
     
     func updateCounter() {
