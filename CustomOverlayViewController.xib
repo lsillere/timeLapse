@@ -52,9 +52,22 @@
                         <action selector="cancelButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="kkO-93-btD"/>
                     </connections>
                 </button>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAo-C6-WKI">
+                    <rect key="frame" x="112" y="616" width="150" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fu-m7-EM4">
+                    <rect key="frame" x="156" y="559" width="63" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <connections>
                 <outlet property="cameraLabel" destination="Zsd-jb-4Fu" id="3dh-i5-yQq"/>
+                <outlet property="progressTimelapseCreation" destination="4fu-m7-EM4" id="1WT-1Y-p1c"/>
+                <outlet property="progressViewTimelapseCreation" destination="xAo-C6-WKI" id="OvZ-MQ-yeN"/>
                 <outlet property="shootButton" destination="YFJ-oq-xQI" id="dwS-t6-Rxr"/>
                 <outlet property="stopButton" destination="e7M-ep-av7" id="u6l-7z-N5U"/>
             </connections>

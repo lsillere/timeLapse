@@ -15,11 +15,12 @@ protocol CustomOverlayDelegate{
 }
 
 class CustomOverlayView: UIView {
-    @IBOutlet weak var shootButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
-    
     var delegate:CustomOverlayDelegate! = nil
     
+    @IBOutlet weak var shootButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var progressTimelapseCreation: UILabel!
+    @IBOutlet weak var progressViewTimelapseCreation: UIProgressView!
     @IBOutlet weak var cameraLabel: UILabel!
     
     @IBAction func shootButton(_ sender: UIButton) {
@@ -39,8 +40,11 @@ class CustomOverlayView: UIView {
         delegate.didStop(overlayView: self)
         self.stopButton.isEnabled = false
         self.stopButton.isHidden = true
-        self.shootButton.isEnabled = true
-        self.shootButton.isHidden = false
+        //self.shootButton.isEnabled = true
+        //self.shootButton.isHidden = false
+        self.cameraLabel.isHidden = true
+        self.progressViewTimelapseCreation.isHidden = false
+        self.progressTimelapseCreation.isHidden = false
     }
     
     /*

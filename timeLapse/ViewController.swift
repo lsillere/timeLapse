@@ -28,6 +28,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
    // var compressedJPGImage: UIImage
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var progressTimelapseCreation: UILabel!
+    @IBOutlet weak var progressViewTimelapseCreation: UIProgressView!
     
     // Encore d'actu ?
     @IBAction func savePhoto(_ sender: Any) {
@@ -85,6 +87,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     // Création de la timelapse
     @IBAction func timeLapse(_ sender: Any) {
+        // affichage progression
+        self.progressViewTimelapseCreation.isHidden = false
+        self.progressTimelapseCreation.isHidden = false
+        
         videoNumber = getData() // Nombre de vidéo enregistrées (A RECUPERER AU LANCEMENT DE L'APPLI EN VAR GLOBALE)
         print("videoNumber : ", videoNumber)
         
@@ -97,6 +103,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
                 DispatchQueue.main.async {
                     let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                    self.progressViewTimelapseCreation.setProgress(progressPercentage, animated: true)
+                    let progressPercentageText:String = String(progressPercentage*100) + "%"
+                    self.progressTimelapseCreation.text = progressPercentageText
                 }
                 /*dispatch_get_main_queue().asynchronously(execute: {
                     let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
@@ -334,6 +343,47 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func didStop(overlayView:CustomOverlayView) {
         print("Stop capture")
         timer.invalidate()
+        
+        videoNumber = getData() // Nombre de vidéo enregistrées (A RECUPERER AU LANCEMENT DE L'APPLI EN VAR GLOBALE)
+        print("videoNumber : ", videoNumber)
+        
+        videoName = getVideoName()
+        print("videoName : ", videoName)
+        
+        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: imagePath, orientation: (imageView.image?.imageOrientation)!, videoNumber: videoNumber)
+        self.timeLapseBuilder!.build(
+            { (progress: Progress) in
+                NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
+                DispatchQueue.main.async {
+                    let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                    self.customView.progressViewTimelapseCreation.setProgress(progressPercentage, animated: true)
+                    let progressPercentageText:String = String(progressPercentage*100) + "%"
+                    self.customView.progressTimelapseCreation.text = progressPercentageText
+                }
+                /*dispatch_get_main_queue().asynchronously(execute: {
+                 let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                 progressHUD.setProgress(progressPercentage, animated: true)
+                 })*/
+        },
+            success: { url in
+                NSLog("Output written to \(url)")
+                self.videoNumber += 1
+                /*dispatch_async(dispatch_get_main_queue(), {
+                 //progressHUD.dismiss()
+                 })*/
+                // Save nombre vidéo enregistrés
+                self.saveData(value: self.videoNumber, key: "videoNumber")
+                self.videoName.append("AssembledVideo"+String(self.videoNumber-1)+".mov")
+                self.saveVideoName(value: self.videoName, key: "videoName")
+        },
+            failure: { error in
+                NSLog("failure: \(error)")
+                /*dispatch_async(dispatch_get_main_queue(), {
+                 progressHUD.dismiss()
+                 })*/
+        }
+        )
+
     }
     
     func updateCounter() {

@@ -46,9 +46,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-Pb-L59">
-                                <rect key="frame" x="159" y="547" width="46" height="30"/>
+                                <rect key="frame" x="142" y="547" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Lapse"/>
+                                <state key="normal" title="Create Lapse"/>
                                 <connections>
                                     <action selector="timeLapse:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EUH-ZP-AU1"/>
                                 </connections>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZk-Gw-tnr">
-                                <rect key="frame" x="154" y="509" width="56" height="30"/>
+                                <rect key="frame" x="159" y="509" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Remove"/>
                                 <connections>
@@ -86,13 +86,24 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5F-3s-Jn7">
-                                <rect key="frame" x="135" y="585" width="95" height="30"/>
+                                <rect key="frame" x="140" y="585" width="95" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="camera"/>
                                 <connections>
                                     <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nfx-hA-qfv"/>
                                 </connections>
                             </button>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e4G-oN-YN3">
+                                <rect key="frame" x="112" y="463" width="150" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEt-RF-qX9">
+                                <rect key="frame" x="155" y="423" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -101,16 +112,15 @@
                             <outletCollection property="gestureRecognizers" destination="kyR-nb-34E" appends="YES" id="NvM-99-DrU"/>
                         </connections>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem systemItem="camera" id="Hhw-R6-S8q"/>
-                        <barButtonItem image="camera" id="0fT-N4-bix"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Main" id="XAb-XD-m8N">
                         <barButtonItem key="backBarButtonItem" title="Back" id="KJO-sn-nUJ"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="UiA-sH-XD2" id="6Wm-i2-G6X"/>
+                        <outlet property="progressTimelapseCreation" destination="FEt-RF-qX9" id="4iy-Vz-eDT"/>
+                        <outlet property="progressViewTimelapseCreation" destination="e4G-oN-YN3" id="ddm-9K-VCX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
