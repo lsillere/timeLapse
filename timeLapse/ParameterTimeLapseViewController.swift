@@ -138,7 +138,7 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
-    func saveData(value: String, key: String) {
+    /*func saveData(value: String, key: String) {
  
         do {
             try defaults.removeObject(forKey: key)
@@ -148,7 +148,7 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
 
         defaults.set(value, forKey: key)
         defaults.synchronize()
-    }
+    }*/
     /*
     func getData() {
         if let videoValue = defaults.string(forKey: "videoQuality") {

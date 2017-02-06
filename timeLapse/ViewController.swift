@@ -418,6 +418,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         
         removeImages() // Delete images if exists
+        
+        showCamera()
     }
 
     override func didReceiveMemoryWarning() {
@@ -470,6 +472,43 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         
         return videoName
+    }
+    
+    
+    func showCamera() {
+        if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
+            imagePicker =  UIImagePickerController()
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.delegate = self
+            imagePicker.showsCameraControls = false
+            
+            let customViewController = CustomOverlayViewController(
+                nibName:"CustomOverlayViewController",
+                bundle: nil
+            )
+            self.customView = customViewController.view as! CustomOverlayView
+            self.customView.frame = self.imagePicker.view.frame
+            self.customView.delegate = self
+            
+            present(imagePicker, animated: true, completion: {
+                self.imagePicker.cameraOverlayView = self.customView
+            })
+        }
+        else { //no camera found -- alert the user.
+            let alertVC = UIAlertController(
+                title: "No Camera",
+                message: "Sorry, this device has no camera",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "OK",
+                style:.default,
+                handler: nil)
+            alertVC.addAction(okAction)
+            present(
+                alertVC,
+                animated: true,
+                completion: nil)
+        }
     }
 
 

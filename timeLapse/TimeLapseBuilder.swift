@@ -35,7 +35,7 @@ class TimeLapseBuilder: NSObject {
             outputSize = CGSize(width: 1280, height: 720)
         } else {
             inputSize = CGSize(width: 3024, height: 4032)
-            outputSize = CGSize(width: 720, height: 1280)
+            outputSize = CGSize(width: 3024/3, height: 4032/3)
         }
         var error: NSError?
         
@@ -154,7 +154,17 @@ class TimeLapseBuilder: NSObject {
                     pixelBufferPool,
                     pixelBufferPointer
                 )
-                //print("UIImage : ", url)
+                
+                
+                if(image.imageOrientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
+                    print("UIImage : up/down")
+                }
+                else if(image.imageOrientation == UIImageOrientation.left || orientation == UIImageOrientation.right) {
+                    print("UIImage : rigth/left")
+                }
+                else {
+                    print("UIImage")
+                }
                 //let pixelBuffer2 = pixelBufferPointer.memory
                 if let pixelBuffer = pixelBufferPointer.pointee, status == 0 {
                     fillPixelBufferFromImage(image: image, pixelBuffer: pixelBuffer)
@@ -190,6 +200,38 @@ class TimeLapseBuilder: NSObject {
             space: rgbColorSpace,
             bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue
         )
+        
+        
+        
+        
+        
+        
+        // CGImage transformation for
+        var transform = CGAffineTransform.identity
+        switch image.imageOrientation {
+            
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: image.size.height)
+            transform = transform.rotated(by: CGFloat(M_PI))
+            
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI_2))
+            
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: image.size.height)
+            transform = transform.rotated(by: CGFloat(-M_PI_2))
+            
+        case .up, .upMirrored:
+            break
+        }
+        
+        context?.concatenate(transform)
+        
+        
+        
+        
+        
         //print("Context : ")
         print("Width : ", image.size.width)
         print("Height : ", image.size.height)
