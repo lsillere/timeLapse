@@ -21,9 +21,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var numberPhotoTaken: Int = 0
     var videoOrientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
     var timer = Timer()
+    let settings = Settings()
     
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var previewView: UIView!
     
     
     /*!
@@ -70,7 +72,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
     }
     
-    @IBOutlet weak var previewView: UIView!
     
     @IBAction func takePhoto(_ sender: UIButton) {
         /* For video
@@ -85,12 +86,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.stopButton.isHidden = false
         
         print("Start capture")
-        let interval: TimeInterval = 1
-        /*if let intervalValue = UserDefaults.standard.string(forKey: "interval") {
-            interval = TimeInterval(intervalValue)!
-        } else {
-            interval = 1
-        }*/
+        let interval: TimeInterval = Double(settings.interval)!
         updateCounter()
         timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: #selector(CameraViewController.updateCounter), userInfo: nil, repeats: true)
         
@@ -120,6 +116,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         videoNumber = getNumberOfVideo()
+        print("VideoQuality \(settings.videoQuality)")
+        print("Interval \(settings.interval)")
 
         /*fileName = "mysavefile.mp4";
          let documentsURL = FileManager.default.urls(for: .DocumentDirectory, in: .UserDomainMask)[0]

@@ -27,7 +27,7 @@ class Settings {
             self.interval = interval
             print("Video interval : ", interval)
         } else {
-            self.interval = "720P"
+            self.interval = "1"
         }
     }
     
