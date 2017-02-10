@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7606ADA81E47D2F600177800 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606ADA71E47D2F600177800 /* VideoCell.swift */; };
+		760F91031E4B8E14007C73A8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760F91021E4B8E14007C73A8 /* CameraViewController.swift */; };
 		764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD0081E43AD3E0083E1EE /* Settings.swift */; };
 		76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E791DE7B9F20065EE50 /* AppDelegate.swift */; };
 		76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E7B1DE7B9F20065EE50 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		7606ADA71E47D2F600177800 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		760F91021E4B8E14007C73A8 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		764CD0081E43AD3E0083E1EE /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		76631E761DE7B9F20065EE50 /* timeLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E791DE7B9F20065EE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				76631E791DE7B9F20065EE50 /* AppDelegate.swift */,
 				76631E7B1DE7B9F20065EE50 /* ViewController.swift */,
 				76631E7D1DE7B9F20065EE50 /* Main.storyboard */,
+				760F91021E4B8E14007C73A8 /* CameraViewController.swift */,
 				7606ADA71E47D2F600177800 /* VideoCell.swift */,
 				766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */,
 				76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */,
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				760F91031E4B8E14007C73A8 /* CameraViewController.swift in Sources */,
 				76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */,
 				76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */,
 				764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */,

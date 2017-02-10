@@ -51,7 +51,7 @@ class VideoListCollectionViewController: UICollectionViewController {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
+        print("directory contents: ", directoryContents)
         return directoryContents
     }
 

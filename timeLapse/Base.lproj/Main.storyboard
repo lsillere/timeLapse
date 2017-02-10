@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UiA-sH-XD2">
-                                <rect key="frame" x="0.0" y="57" width="375" height="292"/>
+                                <rect key="frame" x="0.0" y="57" width="375" height="358"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
@@ -110,6 +110,14 @@
                                 <state key="normal" title="Video collection"/>
                                 <connections>
                                     <segue destination="9dM-dZ-Qcn" kind="show" id="DYn-kV-f8J"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-0R-tTT">
+                                <rect key="frame" x="260" y="104" width="68" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Capture 2"/>
+                                <connections>
+                                    <segue destination="8Jz-2B-OAG" kind="show" id="1Lv-Oe-nHu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -305,10 +313,10 @@
             </objects>
             <point key="canvasLocation" x="2005.5999999999999" y="36.431784107946029"/>
         </scene>
-        <!--View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="tUZ-Fb-eng">
             <objects>
-                <viewController id="8Jz-2B-OAG" sceneMemberID="viewController">
+                <viewController id="8Jz-2B-OAG" customClass="CameraViewController" customModule="timeLapse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tsq-zL-WmW"/>
                         <viewControllerLayoutGuide type="bottom" id="olL-qR-l7F"/>
@@ -316,23 +324,59 @@
                     <view key="view" contentMode="scaleToFill" id="FTd-dA-qdU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hL2-9q-RDp">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bal-v7-krr">
+                                <rect key="frame" x="66" y="580" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="y2b-BM-gfU"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-35-p4N">
+                                <rect key="frame" x="271" y="580" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="stopRecording:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="nkb-4c-A4P"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="2iO-db-r1J" appends="YES" id="v8I-4r-F21"/>
-                        </connections>
+                        <constraints>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="bal-v7-krr" secondAttribute="bottom" constant="10" id="3hQ-1V-JmV"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="lu5-35-p4N" secondAttribute="bottom" constant="10" id="ApW-qn-9ZR"/>
+                            <constraint firstItem="bal-v7-krr" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="50" id="HAd-nH-HkZ"/>
+                            <constraint firstItem="hL2-9q-RDp" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leading" id="IIh-aK-sws"/>
+                            <constraint firstItem="bal-v7-krr" firstAttribute="height" secondItem="lu5-35-p4N" secondAttribute="height" id="Q7o-Vw-3QJ"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="hL2-9q-RDp" secondAttribute="bottom" id="bqf-rF-LZW"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="hL2-9q-RDp" secondAttribute="bottom" id="cml-DW-5sw"/>
+                            <constraint firstAttribute="trailing" secondItem="hL2-9q-RDp" secondAttribute="trailing" id="hTO-gf-szM"/>
+                            <constraint firstItem="bal-v7-krr" firstAttribute="width" secondItem="lu5-35-p4N" secondAttribute="width" id="iyJ-5U-zHi"/>
+                            <constraint firstItem="hL2-9q-RDp" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" id="w1t-nj-9Ya"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="50" id="xdf-gT-qut"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="previewView" destination="hL2-9q-RDp" id="8LD-Ny-zHp"/>
+                        <outlet property="shootButton" destination="bal-v7-krr" id="bVf-Q8-vxB"/>
+                        <outlet property="stopButton" destination="lu5-35-p4N" id="pJb-wy-Bo6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpP-Ye-tkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="2iO-db-r1J"/>
             </objects>
-            <point key="canvasLocation" x="972" y="804"/>
+            <point key="canvasLocation" x="972" y="803.74812593703155"/>
         </scene>
         <!--Video List Collection View Controller-->
         <scene sceneID="QUM-qY-1sw">
             <objects>
                 <collectionViewController id="9dM-dZ-Qcn" customClass="VideoListCollectionViewController" customModule="timeLapse" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="ETm-jv-DwU">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ETm-jv-DwU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -374,7 +418,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fT3-Ch-1af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1760.8" y="815.44227886056979"/>
+            <point key="canvasLocation" x="2006" y="804"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Jgl-0L-nSt">

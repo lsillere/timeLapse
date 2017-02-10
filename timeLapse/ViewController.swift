@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  testapp2
+//  TimeLapse
 //
 //  Created by Loic Sillere on 25/11/2016.
 //  Copyright © 2016 Loic Sillere. All rights reserved.
@@ -31,10 +31,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var progressTimelapseCreation: UILabel!
     @IBOutlet weak var progressViewTimelapseCreation: UIProgressView!
     
-    // Encore d'actu ?
     @IBAction func savePhoto(_ sender: Any) {
-        //var imageData = UIImageJPEGRepresentation(imageView.image!, 0.6)
-        //var compressedJPGImage = UIImage(data: imageData!)
         UIImageWriteToSavedPhotosAlbum(imageView.image!, nil, nil, nil)
         
         let alertVC = UIAlertController(
@@ -55,8 +52,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     // Test afichage image et taille - à retirer avant soumission
     @IBAction func testAction(_ sender: Any) {
-        let dataNew = FileManager.default.contents(atPath: imagePath[cpt])
+        //let photosURL = getImageUrl()
+        
+        let photoPath = getPhotosPath()
+        print ("Photo path", photoPath)
+        let dataNew = FileManager.default.contents(atPath: photoPath[cpt])
         let imageTest = UIImage(data: dataNew!)
+        imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.image = imageTest
         print("Width:", imageTest?.size.width)
         print("Height:", imageTest?.size.height)
@@ -91,13 +93,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.progressViewTimelapseCreation.isHidden = false
         self.progressTimelapseCreation.isHidden = false
         
-        videoNumber = getData() // Nombre de vidéo enregistrées (A RECUPERER AU LANCEMENT DE L'APPLI EN VAR GLOBALE)
+        videoNumber = getData() // Nombre de vidéo enregistrées
         print("videoNumber : ", videoNumber)
         
         videoName = getVideoName()
         print("videoName : ", videoName)
-        
-        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: imagePath, orientation: (imageView.image?.imageOrientation)!, videoNumber: videoNumber)
+        let photoPath = getPhotosPath()
+
+        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: photoPath, orientation: UIImageOrientation.right, videoNumber: videoNumber)
         self.timeLapseBuilder!.build(
             { (progress: Progress) in
                 NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
@@ -133,7 +136,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     // Lecture de la dernière vidéo "time lapsé"
-    // GESTION DE VIDEOPATH ET VIDEOURL WTF !!! -> à mettre en ordre on comprend rien
     @IBAction func playTimeLapse(_ sender: Any) {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let videoOutputURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("/TimeLapseVideo/AssembledVideo"+String(videoNumber-1)+".mov"))
@@ -192,8 +194,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
     }
     
-    
-    @IBAction func takePhoto(_ sender: Any) { // Part vers la caméra
+    // Open camera using UIImagePickerController
+    @IBAction func takePhoto(_ sender: Any) {
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             imagePicker =  UIImagePickerController()
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera
@@ -297,9 +299,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         print("ImageURL :", imageURL[0])*/
         counterImage += 1
         print(counterImage)
+        // Set label avancement of video
         self.customView.cameraLabel.text = String(counterImage) + " -> " + String(counterImage/30) + "s"
-        //UIImageWriteToSavedPhotosAlbum(imageView.image!, nil, nil, nil)
-        //print("UIImage : ", imageView.image)
     }
     
     // Cancel photo -> spot la capture
@@ -350,7 +351,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         videoName = getVideoName()
         print("videoName : ", videoName)
         
-        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: imagePath, orientation: (imageView.image?.imageOrientation)!, videoNumber: videoNumber)
+        let photoPath = getPhotosPath()
+        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: photoPath, orientation: (imageView.image?.imageOrientation)!, videoNumber: videoNumber)
         self.timeLapseBuilder!.build(
             { (progress: Progress) in
                 NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
@@ -419,7 +421,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         removeImages() // Delete images if exists
         
-        showCamera()
+        //showCamera()
     }
 
     override func didReceiveMemoryWarning() {
@@ -509,6 +511,27 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 animated: true,
                 completion: nil)
         }
+    }
+    
+    // Path of photos in document directory
+    func getPhotosPath() -> [String] {
+        var contentsPath = [String]()
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let photoDirectoryPath = documentsPath[0] + "/ImagePicker/"
+        
+        do {
+            contentsPath = try FileManager.default.contentsOfDirectory(atPath: photoDirectoryPath)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        var cpt:Int = 0
+        for elements in contentsPath {
+            contentsPath[cpt] = photoDirectoryPath + elements
+            cpt += 1
+        }
+        
+        return contentsPath
     }
 
 

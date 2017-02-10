@@ -31,11 +31,15 @@ class TimeLapseBuilder: NSObject {
 
         // Dimmension de la vidéo en fonction de l'orientation des photos prises
         if(orientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
-            inputSize = CGSize(width: 4032, height: 3024)
-            outputSize = CGSize(width: 1280, height: 720)
+            /*inputSize = CGSize(width: 4032, height: 3024)
+            outputSize = CGSize(width: 1280, height: 720)*/
+            inputSize = CGSize(width: 1920, height: 1080)
+            outputSize = CGSize(width: 1920, height: 1080)
         } else {
-            inputSize = CGSize(width: 3024, height: 4032)
-            outputSize = CGSize(width: 3024/3, height: 4032/3)
+            /*inputSize = CGSize(width: 3024, height: 4032)
+            outputSize = CGSize(width: 3024/3, height: 4032/3)*/
+            inputSize = CGSize(width: 1080, height: 1920)
+            outputSize = CGSize(width: 1080, height: 1920)
         }
         var error: NSError?
         
@@ -155,16 +159,6 @@ class TimeLapseBuilder: NSObject {
                     pixelBufferPointer
                 )
                 
-                
-                if(image.imageOrientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
-                    print("UIImage : up/down")
-                }
-                else if(image.imageOrientation == UIImageOrientation.left || orientation == UIImageOrientation.right) {
-                    print("UIImage : rigth/left")
-                }
-                else {
-                    print("UIImage")
-                }
                 //let pixelBuffer2 = pixelBufferPointer.memory
                 if let pixelBuffer = pixelBufferPointer.pointee, status == 0 {
                     fillPixelBufferFromImage(image: image, pixelBuffer: pixelBuffer)
@@ -203,7 +197,7 @@ class TimeLapseBuilder: NSObject {
         
         
         
-        
+        print("image.size.width: ", image.size.width)
         
         
         // CGImage transformation for
@@ -229,13 +223,16 @@ class TimeLapseBuilder: NSObject {
         context?.concatenate(transform)
         
         
+        switch image.imageOrientation {
+        case UIImageOrientation.left, UIImageOrientation.leftMirrored, UIImageOrientation.right, UIImageOrientation.rightMirrored:
+            context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width))
+            break
+        default:
+            context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+            break
+        }
         
-        
-        
-        //print("Context : ")
-        print("Width : ", image.size.width)
-        print("Height : ", image.size.height)
-        context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        //context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width))
         
         /*if(orientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
             context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
