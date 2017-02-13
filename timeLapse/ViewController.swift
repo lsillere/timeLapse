@@ -99,40 +99,45 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         videoName = getVideoName()
         print("videoName : ", videoName)
         let photoPath = getPhotosPath()
-
+        
+        self.timeLapseBuilder?.removeVideoIfExist()
         self.timeLapseBuilder = TimeLapseBuilder(photoURLs: photoPath, orientation: UIImageOrientation.right, videoNumber: videoNumber)
-        self.timeLapseBuilder!.build(
-            { (progress: Progress) in
-                NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
-                DispatchQueue.main.async {
-                    let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                    self.progressViewTimelapseCreation.setProgress(progressPercentage, animated: true)
-                    let progressPercentageText:String = String(progressPercentage*100) + "%"
-                    self.progressTimelapseCreation.text = progressPercentageText
+        //self.timeLapseBuilder?.prepBuild()
+        
+
+            self.timeLapseBuilder!.build(
+                { (progress: Progress) in
+                    NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
+                    DispatchQueue.main.async {
+                        let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                        self.progressViewTimelapseCreation.setProgress(progressPercentage, animated: true)
+                        let progressPercentageText:String = String(progressPercentage*100) + "%"
+                        self.progressTimelapseCreation.text = progressPercentageText
+                    }
+                    /*dispatch_get_main_queue().asynchronously(execute: {
+                        let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                        progressHUD.setProgress(progressPercentage, animated: true)
+                     })*/
+                },
+                success: { url in
+                    NSLog("Output written to \(url)")
+                    self.videoNumber += 1
+                    /*dispatch_async(dispatch_get_main_queue(), {
+                        //progressHUD.dismiss()
+                     })*/
+                    // Save nombre vidéo enregistrés
+                    self.saveData(value: self.videoNumber, key: "videoNumber")
+                    self.videoName.append("AssembledVideo"+String(self.videoNumber-1)+".mov")
+                    self.saveVideoName(value: self.videoName, key: "videoName")
+                },
+                failure: { error in
+                    NSLog("failure: \(error)")
+                    /*dispatch_async(dispatch_get_main_queue(), {
+                        progressHUD.dismiss()
+                     })*/
                 }
-                /*dispatch_get_main_queue().asynchronously(execute: {
-                    let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                    progressHUD.setProgress(progressPercentage, animated: true)
-                })*/
-        },
-            success: { url in
-                NSLog("Output written to \(url)")
-                self.videoNumber += 1
-                /*dispatch_async(dispatch_get_main_queue(), {
-                    //progressHUD.dismiss()
-                })*/
-                // Save nombre vidéo enregistrés
-                self.saveData(value: self.videoNumber, key: "videoNumber")
-                self.videoName.append("AssembledVideo"+String(self.videoNumber-1)+".mov")
-                self.saveVideoName(value: self.videoName, key: "videoName")
-        },
-            failure: { error in
-                NSLog("failure: \(error)")
-                /*dispatch_async(dispatch_get_main_queue(), {
-                    progressHUD.dismiss()
-                })*/
-        }
-        )
+            )
+        
     }
     
     // Lecture de la dernière vidéo "time lapsé"

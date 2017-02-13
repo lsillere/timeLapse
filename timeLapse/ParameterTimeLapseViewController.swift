@@ -14,10 +14,7 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
     
     let parameterItemTitle = ["1", "2"]
     let parameterItem = ["plop", "test", "a", "b"]
-    /*var videoQuality:String = ""
-    var interval:String = "" // interval betwenn 2 pictures which drive vitess of the video*/
     let settings = Settings()
-    
     let defaults: UserDefaults = UserDefaults.standard
     
     @IBOutlet weak var vitessSegmentedControll: UISegmentedControl!
@@ -167,11 +164,8 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("test")
-
         let cell = parameterTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = parameterItem[indexPath.row]
-        print("test")
         return cell
     }
     

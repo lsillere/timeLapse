@@ -19,36 +19,85 @@ class TimeLapseBuilder: NSObject {
     let orientation: UIImageOrientation
     var videoNumber: Int
     
+    let inputSize: CGSize
+    let outputSize: CGSize
+    let videoOutputURL: URL
+    let videoSettings: [String : AnyObject]
+    
+    
+    
+    /*let videoWriterInput: AVAssetWriterInput
+    let sourceBufferAttributes: [String : Any]
+    var pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor
+    var frameCount: Int64 = 0*/
+    
+    
+    
     init(photoURLs: [String], orientation: UIImageOrientation, videoNumber: Int) {
         self.photoURLs = photoURLs
         self.orientation = orientation
         self.videoNumber = videoNumber
+        
+        // Video dimension based on photos orientation
+        if(orientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
+            /*inputSize = CGSize(width: 4032, height: 3024)
+             outputSize = CGSize(width: 1280, height: 720)*/
+            self.inputSize = CGSize(width: 1920, height: 1080)
+            self.outputSize = CGSize(width: 1920, height: 1080)
+            print("orientation UP/Down")
+        } else {
+            /*inputSize = CGSize(width: 3024, height: 4032)
+             outputSize = CGSize(width: 3024/3, height: 4032/3)*/
+            self.inputSize = CGSize(width: 1080, height: 1920)
+            self.outputSize = CGSize(width: 1080, height: 1920)
+            print("orientation right/left")
+        }
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        self.videoOutputURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("TimeLapseVideo/AssembledVideo"+String(videoNumber)+".mov"))
+        print("TimeLapseBuilderVideoOutputUrl : \(self.videoOutputURL)")
+        
+        self.videoSettings = [
+            AVVideoCodecKey  : AVVideoCodecH264 as AnyObject,
+            AVVideoWidthKey  : outputSize.width as AnyObject,
+            AVVideoHeightKey : outputSize.height as AnyObject,
+            //        AVVideoCompressionPropertiesKey : [
+            //          AVVideoAverageBitRateKey : NSInteger(1000000),
+            //          AVVideoMaxKeyFrameIntervalKey : NSInteger(16),
+            //          AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel
+            //        ]
+        ]
+        
+        
+        
+        
+        
+        
+        /*self.videoWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: videoSettings)
+        
+        self.sourceBufferAttributes = [
+            (kCVPixelBufferPixelFormatTypeKey as String): Int(kCVPixelFormatType_32ARGB),
+            (kCVPixelBufferWidthKey as String): Float(inputSize.width),
+            (kCVPixelBufferHeightKey as String): Float(inputSize.height)] as [String : Any]
+        self.pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(
+            assetWriterInput: self.videoWriterInput,
+            sourcePixelBufferAttributes: sourceBufferAttributes
+        )*/
+
+        
+        
+    }
+    
+    func removeVideoIfExist() {
+        do {
+            try FileManager.default.removeItem(at: self.videoOutputURL)
+        } catch let writerError as NSError {
+            print(writerError)
+        }
     }
     
     func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: ((NSError) -> Void)) {
-        let inputSize: CGSize
-        let outputSize: CGSize
-
-        // Dimmension de la vidéo en fonction de l'orientation des photos prises
-        if(orientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
-            /*inputSize = CGSize(width: 4032, height: 3024)
-            outputSize = CGSize(width: 1280, height: 720)*/
-            inputSize = CGSize(width: 1920, height: 1080)
-            outputSize = CGSize(width: 1920, height: 1080)
-        } else {
-            /*inputSize = CGSize(width: 3024, height: 4032)
-            outputSize = CGSize(width: 3024/3, height: 4032/3)*/
-            inputSize = CGSize(width: 1080, height: 1920)
-            outputSize = CGSize(width: 1080, height: 1920)
-        }
         var error: NSError?
-        
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        let videoOutputURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("TimeLapseVideo/AssembledVideo"+String(videoNumber)+".mov"))
-        print("TimeLapseBuilderVideoOutputUrl :", videoOutputURL)
-        do {
-            try FileManager.default.removeItem(at: videoOutputURL)
-        } catch {}
         
         do {
             try videoWriter = AVAssetWriter(outputURL: videoOutputURL, fileType: AVFileTypeQuickTimeMovie)
@@ -58,16 +107,6 @@ class TimeLapseBuilder: NSObject {
         }
         
         if let videoWriter = videoWriter {
-            let videoSettings: [String : AnyObject] = [
-                AVVideoCodecKey  : AVVideoCodecH264 as AnyObject,
-                AVVideoWidthKey  : outputSize.width as AnyObject,
-                AVVideoHeightKey : outputSize.height as AnyObject,
-                //        AVVideoCompressionPropertiesKey : [
-                //          AVVideoAverageBitRateKey : NSInteger(1000000),
-                //          AVVideoMaxKeyFrameIntervalKey : NSInteger(16),
-                //          AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel
-                //        ]
-            ]
             
             let videoWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: videoSettings)
             
@@ -123,7 +162,7 @@ class TimeLapseBuilder: NSObject {
                     videoWriterInput.markAsFinished()
                     videoWriter.finishWriting {
                         if error == nil {
-                            success(videoOutputURL)
+                            success(self.videoOutputURL)
                         }
                         
                         self.videoWriter = nil
@@ -145,35 +184,34 @@ class TimeLapseBuilder: NSObject {
     
     func appendPixelBufferForImageAtURL(_ url: String, pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor, presentationTime: CMTime) -> Bool {
         var appendSucceeded = false
-        
+        //print("pixelBufferAdaptor.pixelBufferPool: ", pixelBufferAdaptor.pixelBufferPool)
         autoreleasepool {
             if //let url = URL(string: url),
                 //let imageData = try? Data(contentsOf: url),
                 let imageData = FileManager.default.contents(atPath: url),
                 let image = UIImage(data: imageData),
                 let pixelBufferPool = pixelBufferAdaptor.pixelBufferPool {
-                let pixelBufferPointer = UnsafeMutablePointer<CVPixelBuffer?>.allocate(capacity: 1)
-                let status: CVReturn = CVPixelBufferPoolCreatePixelBuffer(
-                    kCFAllocatorDefault,
-                    pixelBufferPool,
-                    pixelBufferPointer
-                )
-                
-                //let pixelBuffer2 = pixelBufferPointer.memory
-                if let pixelBuffer = pixelBufferPointer.pointee, status == 0 {
-                    fillPixelBufferFromImage(image: image, pixelBuffer: pixelBuffer)
-                    
-                    appendSucceeded = pixelBufferAdaptor.append(
-                        pixelBuffer,
-                        withPresentationTime: presentationTime
+                    let pixelBufferPointer = UnsafeMutablePointer<CVPixelBuffer?>.allocate(capacity: 1)
+                    let status: CVReturn = CVPixelBufferPoolCreatePixelBuffer(
+                        kCFAllocatorDefault,
+                        pixelBufferPool,
+                        pixelBufferPointer
                     )
-                    
-                    pixelBufferPointer.deinitialize()
-                } else {
-                    NSLog("error: Failed to allocate pixel buffer from pool")
-                }
                 
-                pixelBufferPointer.deallocate(capacity: 1)
+                    if let pixelBuffer = pixelBufferPointer.pointee, status == 0 {
+                        fillPixelBufferFromImage(image: image, pixelBuffer: pixelBuffer)
+                    
+                        appendSucceeded = pixelBufferAdaptor.append(
+                            pixelBuffer,
+                            withPresentationTime: presentationTime
+                        )
+                    
+                        pixelBufferPointer.deinitialize()
+                    } else {
+                        NSLog("error: Failed to allocate pixel buffer from pool")
+                    }
+                
+                    pixelBufferPointer.deallocate(capacity: 1)
             }
         }
         
@@ -196,10 +234,6 @@ class TimeLapseBuilder: NSObject {
         )
         
         
-        
-        print("image.size.width: ", image.size.width)
-        
-        
         // CGImage transformation for
         var transform = CGAffineTransform.identity
         switch image.imageOrientation {
@@ -207,16 +241,17 @@ class TimeLapseBuilder: NSObject {
         case .down, .downMirrored:
             transform = transform.translatedBy(x: image.size.width, y: image.size.height)
             transform = transform.rotated(by: CGFloat(M_PI))
-            
+            print("down")
         case .left, .leftMirrored:
             transform = transform.translatedBy(x: image.size.width, y: 0)
             transform = transform.rotated(by: CGFloat(M_PI_2))
-            
+            print("left")
         case .right, .rightMirrored:
             transform = transform.translatedBy(x: 0, y: image.size.height)
             transform = transform.rotated(by: CGFloat(-M_PI_2))
-            
+            print("right")
         case .up, .upMirrored:
+            print("up")
             break
         }
         
@@ -244,4 +279,86 @@ class TimeLapseBuilder: NSObject {
         */
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
     }
+    
+    
+    
+    
+    /*func prepBuild() {
+        do {
+            try self.videoWriter = AVAssetWriter(outputURL: videoOutputURL, fileType: AVFileTypeQuickTimeMovie)
+        } catch let writerError as NSError {
+            print(writerError)
+            self.videoWriter = nil
+        }
+        if self.videoWriter != nil {
+            self.videoWriterInput.expectsMediaDataInRealTime = true
+
+            assert(self.videoWriter!.canAdd(videoWriterInput))
+            self.videoWriter!.add(videoWriterInput)
+        }
+        /*self.pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(
+            assetWriterInput: videoWriterInput,
+            sourcePixelBufferAttributes: sourceBufferAttributes
+        )*/
+        print("prepBuild")
+        self.videoWriter!.startWriting()
+        print("test startWriting")
+            self.videoWriter!.startSession(atSourceTime: kCMTimeZero)
+        print("test startsession")
+            assert(self.pixelBufferAdaptor.pixelBufferPool != nil)
+        print("test assert")
+        
+        
+    }*/
+    
+    /*func endBuild() {
+        self.videoWriterInput.markAsFinished()
+        self.videoWriter!.finishWriting()
+    }
+    
+    //videoWriter = nil
+    }*/
+
+    
+    /*func buildNew(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: ((NSError) -> Void), nextPhotoURL: String) {
+        var error: NSError?
+        
+        print("VideoWritter: ", self.videoWriter!)
+        if self.videoWriter != nil {
+                let media_queue = DispatchQueue(label: "mediaInputQueue")
+                
+                //self.videoWriterInput.requestMediaDataWhenReady(on: media_queue) {
+                    let fps: Int32 = 30
+                    let frameDuration = CMTimeMake(1, fps)
+                    let currentProgress = Progress(totalUnitCount: Int64(self.photoURLs.count))
+                    
+                    //var remainingPhotoURLs = [String](self.photoURLs)
+                    
+                   if(self.videoWriterInput.isReadyForMoreMediaData) {
+                        //let nextPhotoURL = remainingPhotoURLs.remove(at: 0)
+                        let lastFrameTime = CMTimeMake(self.frameCount, fps)
+                        let presentationTime = self.frameCount == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, frameDuration)
+                        
+                        if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: self.pixelBufferAdaptor, presentationTime: presentationTime) {
+                            error = NSError(
+                                domain: kErrorDomain,
+                                code: kFailedToAppendPixelBufferError,
+                                userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
+                            )
+                            print("error")
+                        }
+                        
+                        self.frameCount += 1
+                        
+                        currentProgress.completedUnitCount = self.frameCount
+                        progress(currentProgress)
+                    }
+                //}
+            
+        }
+        
+        if let error = error {
+            failure(error)
+        }
+    }*/
 }

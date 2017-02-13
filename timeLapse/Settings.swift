@@ -11,6 +11,8 @@ import UIKit
 class Settings {
     var interval: String // interval in second between 2 pictures taken
     var videoQuality: String
+    var videoNumber: Int
+    var videoName: [String]
     
     // Get var values from userdefault or set default values
     init() {
@@ -29,6 +31,22 @@ class Settings {
         } else {
             self.interval = "1"
         }
+        
+        self.videoNumber = defaults.integer(forKey: "videoNumber")
+        print("videoNumber: ", videoNumber)
+        /* {
+            self.videoNumber = videoNumber
+            print("videoNumber : ", videoNumber)
+        } else {
+            self.videoNumber = 0
+        }*/
+    
+        if let videoName = defaults.stringArray(forKey: "videoName") {
+            self.videoName = videoName
+            print("videoName: ", videoName)
+        } else {
+            videoName = []
+        }
     }
     
     
@@ -43,6 +61,15 @@ class Settings {
         // Save interval
         defaults.removeObject(forKey: "interval")
         defaults.set(self.interval, forKey: "interval")
+        
+        defaults.synchronize()
+    }
+    
+    func saveVideoNumber() {
+        let defaults: UserDefaults = UserDefaults.standard
+        
+        defaults.removeObject(forKey: "videoNumber")
+        defaults.set(self.videoNumber, forKey: "videoNumber")
         
         defaults.synchronize()
     }

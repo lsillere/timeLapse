@@ -22,12 +22,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var videoOrientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
     var timer = Timer()
     let settings = Settings()
+    var timeLapseBuilder: TimeLapseBuilder?
+    var videoName:[String] = []
+    var orientation: UIImageOrientation = UIImageOrientation.right
     
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var previewView: UIView!
+    @IBOutlet weak var progressTimelapseCreation: UILabel!
     
-    
+    @IBOutlet weak var progressViewTimelapseCreation: UIView!
     /*!
      @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
      @abstract
@@ -72,7 +76,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
     }
     
-    
     @IBAction func takePhoto(_ sender: UIButton) {
         /* For video
         videoOutputURL = getFileURL(numberOfVideo: videoNumber)
@@ -106,6 +109,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
         print("Stop capture")
         timer.invalidate()
+        buildTimeLapse()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,7 +119,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        videoNumber = getNumberOfVideo()
+        videoNumber = settings.videoNumber
         print("VideoQuality \(settings.videoQuality)")
         print("Interval \(settings.interval)")
 
@@ -191,13 +195,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         return videoOutputURL!
     }
-    
-    func getNumberOfVideo() -> Int {
-        let defaults: UserDefaults = UserDefaults.standard
-        let number:Int = defaults.integer(forKey: "videoNumber") // default value 0
-        
-        return number
-    }
 
     func capturePicture(){
         if (cameraOutput?.connection(withMediaType: AVMediaTypeVideo)) != nil {
@@ -246,15 +243,19 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         switch UIDevice.current.orientation {
         case UIDeviceOrientation.landscapeLeft :
             print("landscape left")
+            orientation = UIImageOrientation.up
             videoOrientation = AVCaptureVideoOrientation.landscapeRight
         case UIDeviceOrientation.landscapeRight :
             print("landscape right")
             videoOrientation = AVCaptureVideoOrientation.landscapeLeft
+            orientation = UIImageOrientation.up
         case UIDeviceOrientation.portrait :
             print("portrait")
+            orientation = UIImageOrientation.right
             videoOrientation = AVCaptureVideoOrientation.portrait
         case UIDeviceOrientation.portraitUpsideDown :
             print("portraitUpsideDown")
+            orientation = UIImageOrientation.right
             videoOrientation = AVCaptureVideoOrientation.portraitUpsideDown
         default:
             print("error")
@@ -278,4 +279,112 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         capturePicture()
     }
 
+    
+    func getVideoName() -> [String] {
+        let defaults: UserDefaults = UserDefaults.standard
+        var videoName:[String] = []
+        if let name = defaults.stringArray(forKey: "videoName") {
+            videoName = name
+        }
+        
+        return videoName
+    }
+    
+    func saveVideoName(value: [String], key: String) {
+        let defaults: UserDefaults = UserDefaults.standard
+        
+        do {
+            try defaults.removeObject(forKey: key)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        defaults.set(value, forKey: key)
+        defaults.synchronize()
+    }
+    
+    func getPhotosPath() -> [String] {
+        var contentsPath = [String]()
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let photoDirectoryPath = documentsPath[0] + "/ImagePicker/"
+        
+        do {
+            contentsPath = try FileManager.default.contentsOfDirectory(atPath: photoDirectoryPath)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        var cpt:Int = 0
+        for elements in contentsPath {
+            contentsPath[cpt] = photoDirectoryPath + elements
+            cpt += 1
+        }
+        
+        return contentsPath
+    }
+
+    func buildTimeLapse() {
+        // affichage progression
+        self.progressViewTimelapseCreation.isHidden = false
+        self.progressTimelapseCreation.isHidden = false
+        
+        let videoName = getVideoName()
+        print("videoName : ", videoName)
+        let photoPath = getPhotosPath()
+        
+        self.timeLapseBuilder?.removeVideoIfExist()
+        self.timeLapseBuilder = TimeLapseBuilder(photoURLs: photoPath, orientation: orientation, videoNumber: settings.videoNumber)
+        
+        self.settings.videoNumber += 1
+        self.settings.saveVideoNumber()
+        
+        self.timeLapseBuilder!.build(
+            { (progress: Progress) in
+                NSLog("Progress: \(progress.completedUnitCount) / \(progress.totalUnitCount)")
+                DispatchQueue.main.async {
+                    let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                    //progressViewTimelapseCreation.setProgress(progressPercentage, animated: true)
+                    let progressPercentageText:String = String(progressPercentage*100) + "%"
+                    self.progressTimelapseCreation.text = progressPercentageText
+                }
+                /*dispatch_get_main_queue().asynchronously(execute: {
+                 let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
+                 progressHUD.setProgress(progressPercentage, animated: true)
+                 })*/
+        },
+            success: { url in
+                NSLog("Output written to \(url)")
+                /*dispatch_async(dispatch_get_main_queue(), {
+                 //progressHUD.dismiss()
+                 })*/
+                // Save nombre vidéo enregistrés
+                self.removeImages()
+        },
+            failure: { error in
+                NSLog("failure: \(error)")
+                /*dispatch_async(dispatch_get_main_queue(), {
+                 progressHUD.dismiss()
+                 })*/
+        }
+        )
+    }
+    
+    func removeImages() {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let photosURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("/ImagePicker"))
+        
+        do {
+            let imagesDirectoryContents = try FileManager.default.contentsOfDirectory(at: photosURL, includingPropertiesForKeys: nil, options: [])
+            for element in imagesDirectoryContents {
+                do {
+                    try FileManager.default.removeItem(at: element)
+                } catch {
+                    print("Could not delete file") // gestion des erreurs : TO IMPROVE
+                }
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+    }
 }
