@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5q1-zR-xbL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYi-8m-PlE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -117,7 +117,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Capture 2"/>
                                 <connections>
-                                    <segue destination="8Jz-2B-OAG" kind="show" id="1Lv-Oe-nHu"/>
+                                    <segue destination="BYi-8m-PlE" kind="show" id="1Lv-Oe-nHu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -299,9 +299,6 @@
                             <constraint firstItem="ccv-Me-OAA" firstAttribute="top" secondItem="TN2-5i-75v" secondAttribute="bottom" constant="20" id="oCJ-hS-hhT"/>
                             <constraint firstItem="5Jr-KU-yGC" firstAttribute="top" secondItem="XTJ-4K-xcG" secondAttribute="bottom" constant="10" id="wLb-ns-lwI"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="7PU-hd-Lu7" appends="YES" id="oTk-Ta-mdi"/>
-                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="5gW-Mr-RaZ">
@@ -314,11 +311,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tFh-cU-DuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="7PU-hd-Lu7">
-                    <connections>
-                        <segue destination="8Jz-2B-OAG" kind="show" id="eBk-7u-FHU"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2944.8000000000002" y="36.431784107946029"/>
         </scene>
@@ -338,11 +330,14 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="3tO-Fv-YoJ" appends="YES" id="Nrb-UK-ufm"/>
-                                    <outletCollection property="gestureRecognizers" destination="jvP-2G-bfI" appends="YES" id="NvW-8n-UAp"/>
-                                </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94h-vc-KEy">
+                                <rect key="frame" x="292" y="74" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                                <connections>
+                                    <segue destination="5q1-zR-xbL" kind="show" id="obX-Jg-gmZ"/>
+                                </connections>
+                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-eZ-g1g">
                                 <rect key="frame" x="116" y="498" width="143" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -353,7 +348,7 @@
                                 <rect key="frame" x="116" y="571" width="143" height="2"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bal-v7-krr">
-                                <rect key="frame" x="66" y="580" width="38" height="33"/>
+                                <rect key="frame" x="116" y="580" width="143" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
@@ -361,57 +356,63 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-35-p4N">
-                                <rect key="frame" x="271" y="580" width="38" height="33"/>
+                                <rect key="frame" x="116" y="580" width="143" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="stopRecording:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="nkb-4c-A4P"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZy-RK-eax">
+                                <rect key="frame" x="36" y="583" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="9dM-dZ-Qcn" kind="show" id="JLt-af-u0d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="bal-v7-krr" secondAttribute="bottom" constant="10" id="3hQ-1V-JmV"/>
-                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="lu5-35-p4N" secondAttribute="bottom" constant="10" id="ApW-qn-9ZR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bal-v7-krr" secondAttribute="trailing" constant="100" id="0RQ-KY-14v"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="100" id="3Jh-j1-3dh"/>
+                            <constraint firstItem="94h-vc-KEy" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" constant="10" id="Ctx-95-3Nm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="100" id="Ee9-GP-R2k"/>
                             <constraint firstItem="1D1-s7-uWF" firstAttribute="top" secondItem="On6-eZ-g1g" secondAttribute="bottom" constant="50" id="GD4-PI-AvM"/>
-                            <constraint firstItem="bal-v7-krr" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="50" id="HAd-nH-HkZ"/>
                             <constraint firstItem="hL2-9q-RDp" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leading" id="IIh-aK-sws"/>
                             <constraint firstAttribute="trailingMargin" secondItem="On6-eZ-g1g" secondAttribute="trailing" constant="100" id="MzQ-as-jg1"/>
-                            <constraint firstItem="bal-v7-krr" firstAttribute="height" secondItem="lu5-35-p4N" secondAttribute="height" id="Q7o-Vw-3QJ"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="wZy-RK-eax" secondAttribute="bottom" constant="10" id="V6Q-qz-m7N"/>
                             <constraint firstItem="On6-eZ-g1g" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="VdJ-XU-c6p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1D1-s7-uWF" secondAttribute="trailing" constant="100" id="WRq-sY-N96"/>
+                            <constraint firstItem="bal-v7-krr" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="ZN4-fz-ecB"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="lu5-35-p4N" secondAttribute="bottom" constant="10" id="aqM-QV-dZU"/>
+                            <constraint firstItem="wZy-RK-eax" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="20" id="bKk-bf-cOw"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="hL2-9q-RDp" secondAttribute="bottom" id="bqf-rF-LZW"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="hL2-9q-RDp" secondAttribute="bottom" id="cml-DW-5sw"/>
                             <constraint firstItem="1D1-s7-uWF" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="fwc-4v-oGs"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="1D1-s7-uWF" secondAttribute="bottom" constant="50" id="h32-OK-k6u"/>
+                            <constraint firstItem="lu5-35-p4N" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="hFX-Di-ecb"/>
                             <constraint firstAttribute="trailing" secondItem="hL2-9q-RDp" secondAttribute="trailing" id="hTO-gf-szM"/>
-                            <constraint firstItem="bal-v7-krr" firstAttribute="width" secondItem="lu5-35-p4N" secondAttribute="width" id="iyJ-5U-zHi"/>
+                            <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="bal-v7-krr" secondAttribute="bottom" constant="10" id="lDB-dr-RuP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="94h-vc-KEy" secondAttribute="trailing" constant="10" id="pHO-O6-awO"/>
+                            <constraint firstItem="lu5-35-p4N" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="qbP-tR-Ecn"/>
+                            <constraint firstItem="lu5-35-p4N" firstAttribute="width" secondItem="bal-v7-krr" secondAttribute="width" id="uL2-mn-GLd"/>
                             <constraint firstItem="hL2-9q-RDp" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" id="w1t-nj-9Ya"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="50" id="xdf-gT-qut"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="wbZ-Os-lft"/>
                     <connections>
                         <outlet property="previewView" destination="hL2-9q-RDp" id="8LD-Ny-zHp"/>
                         <outlet property="progressTimelapseCreation" destination="On6-eZ-g1g" id="YTp-Ec-IAK"/>
                         <outlet property="progressViewTimelapseCreation" destination="hL2-9q-RDp" id="Uhs-yi-j6D"/>
                         <outlet property="shootButton" destination="bal-v7-krr" id="bVf-Q8-vxB"/>
                         <outlet property="stopButton" destination="lu5-35-p4N" id="pJb-wy-Bo6"/>
+                        <outlet property="videoLibrary" destination="wZy-RK-eax" id="kOr-hZ-wLs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpP-Ye-tkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="3tO-Fv-YoJ">
-                    <connections>
-                        <segue destination="9dM-dZ-Qcn" kind="show" id="9iC-tK-dpI"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="jvP-2G-bfI">
-                    <connections>
-                        <segue destination="5q1-zR-xbL" kind="show" id="GWS-i2-ore"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2889" y="991"/>
+            <point key="canvasLocation" x="3828" y="990.85457271364328"/>
         </scene>
         <!--Video List Collection View Controller-->
         <scene sceneID="QUM-qY-1sw">
@@ -460,7 +461,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fT3-Ch-1af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3873" y="804"/>
+            <point key="canvasLocation" x="4812" y="803.74812593703155"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Jgl-0L-nSt">
@@ -531,15 +532,32 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="803.74812593703155"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NtM-bF-qyt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BYi-8m-PlE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jRa-jt-iTp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Jz-2B-OAG" kind="relationship" relationship="rootViewController" id="kME-fI-5TG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yMH-Ou-gsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2888.8000000000002" y="990.85457271364328"/>
+        </scene>
     </scenes>
     <resources>
         <image name="camera" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="obX-Jg-gmZ"/>
+        <segue reference="JLt-af-u0d"/>
         <segue reference="x1O-tn-Ah7"/>
-        <segue reference="GWS-i2-ore"/>
-        <segue reference="eBk-7u-FHU"/>
-        <segue reference="9iC-tK-dpI"/>
         <segue reference="2XL-b1-6Q4"/>
     </inferredMetricsTieBreakers>
 </document>

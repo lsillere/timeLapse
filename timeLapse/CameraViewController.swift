@@ -31,6 +31,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var progressTimelapseCreation: UILabel!
     
+    @IBOutlet weak var videoLibrary: UIButton!
     @IBOutlet weak var progressViewTimelapseCreation: UIView!
     /*!
      @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:
@@ -120,17 +121,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         videoNumber = settings.videoNumber
+        videoLibrary.isHidden = false
+        videoLibrary.setTitle(String(videoNumber), for: .normal)
         print("VideoQuality \(settings.videoQuality)")
         print("Interval \(settings.interval)")
-
-        /*fileName = "mysavefile.mp4";
-         let documentsURL = FileManager.default.urls(for: .DocumentDirectory, in: .UserDomainMask)[0]
-         filePath = documentsURL.URLByAppendingPathComponent(fileName)*/
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
         
         session = AVCaptureSession()
@@ -328,8 +326,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.progressViewTimelapseCreation.isHidden = false
         self.progressTimelapseCreation.isHidden = false
         
-        let videoName = getVideoName()
-        print("videoName : ", videoName)
+        /*let videoName = getVideoName()
+        print("video Number : ", settings.videoNumber)*/
         let photoPath = getPhotosPath()
         
         self.timeLapseBuilder?.removeVideoIfExist()
@@ -358,6 +356,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                  //progressHUD.dismiss()
                  })*/
                 // Save nombre vidéo enregistrés
+                print("Remove images")
                 self.removeImages()
         },
             failure: { error in
