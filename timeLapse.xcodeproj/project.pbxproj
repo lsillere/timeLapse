@@ -11,7 +11,7 @@
 		760F91031E4B8E14007C73A8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760F91021E4B8E14007C73A8 /* CameraViewController.swift */; };
 		764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764CD0081E43AD3E0083E1EE /* Settings.swift */; };
 		76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E791DE7B9F20065EE50 /* AppDelegate.swift */; };
-		76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E7B1DE7B9F20065EE50 /* ViewController.swift */; };
+		76631E7C1DE7B9F20065EE50 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631E7B1DE7B9F20065EE50 /* TestViewController.swift */; };
 		76631E7F1DE7B9F20065EE50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E7D1DE7B9F20065EE50 /* Main.storyboard */; };
 		76631E811DE7B9F20065EE50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76631E801DE7B9F20065EE50 /* Assets.xcassets */; };
 		76631E841DE7B9F20065EE50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */; };
@@ -20,10 +20,10 @@
 		76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */; };
 		76631EAA1DE8595B0065EE50 /* CustomOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */; };
 		76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAB1DE859780065EE50 /* CustomOverlayView.swift */; };
-		76631EAE1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */; };
+		76631EAE1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAD1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift */; };
 		76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */; };
 		766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */; };
-		76F7AC7D1E47C597009E19DA /* VideoListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F7AC7C1E47C597009E19DA /* VideoListCollectionViewController.swift */; };
+		76F7AC7D1E47C597009E19DA /* OLDVideoListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F7AC7C1E47C597009E19DA /* OLDVideoListCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,7 @@
 		764CD0081E43AD3E0083E1EE /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		76631E761DE7B9F20065EE50 /* timeLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timeLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76631E791DE7B9F20065EE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		76631E7B1DE7B9F20065EE50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		76631E7B1DE7B9F20065EE50 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		76631E7E1DE7B9F20065EE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76631E801DE7B9F20065EE50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76631E831DE7B9F20065EE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,10 +63,10 @@
 		76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
 		76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayViewController.xib; sourceTree = "<group>"; };
 		76631EAB1DE859780065EE50 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
-		76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildTimeLapseViewController.swift; sourceTree = "<group>"; };
+		76631EAD1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDBuildTimeLapseViewController.swift; sourceTree = "<group>"; };
 		76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLapseBuilder.swift; sourceTree = "<group>"; };
 		766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterTimeLapseViewController.swift; sourceTree = "<group>"; };
-		76F7AC7C1E47C597009E19DA /* VideoListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListCollectionViewController.swift; sourceTree = "<group>"; };
+		76F7AC7C1E47C597009E19DA /* OLDVideoListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDVideoListCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,14 +129,14 @@
 			isa = PBXGroup;
 			children = (
 				76631E791DE7B9F20065EE50 /* AppDelegate.swift */,
-				76631E7B1DE7B9F20065EE50 /* ViewController.swift */,
+				76631E7B1DE7B9F20065EE50 /* TestViewController.swift */,
 				76631E7D1DE7B9F20065EE50 /* Main.storyboard */,
 				760F91021E4B8E14007C73A8 /* CameraViewController.swift */,
 				766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */,
 				76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */,
 				7606ADA71E47D2F600177800 /* VideoCell.swift */,
-				76631EAD1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift */,
-				76F7AC7C1E47C597009E19DA /* VideoListCollectionViewController.swift */,
+				76631EAD1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift */,
+				76F7AC7C1E47C597009E19DA /* OLDVideoListCollectionViewController.swift */,
 				76631E801DE7B9F20065EE50 /* Assets.xcassets */,
 				76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */,
 				76631E851DE7B9F20065EE50 /* Info.plist */,
@@ -303,13 +303,13 @@
 				76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */,
 				76631EA91DE8595B0065EE50 /* CustomOverlayViewController.swift in Sources */,
 				764CD0091E43AD3E0083E1EE /* Settings.swift in Sources */,
-				76631EAE1DE9A4F90065EE50 /* BuildTimeLapseViewController.swift in Sources */,
-				76631E7C1DE7B9F20065EE50 /* ViewController.swift in Sources */,
+				76631EAE1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift in Sources */,
+				76631E7C1DE7B9F20065EE50 /* TestViewController.swift in Sources */,
 				7606ADA81E47D2F600177800 /* VideoCell.swift in Sources */,
 				766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */,
 				76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */,
 				76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */,
-				76F7AC7D1E47C597009E19DA /* VideoListCollectionViewController.swift in Sources */,
+				76F7AC7D1E47C597009E19DA /* OLDVideoListCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

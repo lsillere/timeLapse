@@ -8,12 +8,10 @@
 
 import UIKit
 
-class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ParameterTimeLapseViewController: UIViewController/*, UITableViewDelegate, UITableViewDataSource*/ {
     
     @IBOutlet weak var parameterTableView: UITableView!
     
-    let parameterItemTitle = ["1", "2"]
-    let parameterItem = ["plop", "test", "a", "b"]
     let settings = Settings()
     let defaults: UserDefaults = UserDefaults.standard
     
@@ -159,7 +157,7 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
         }
     }*/
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    /*func numberOfSections(in tableView: UITableView) -> Int {
         return parameterItemTitle.count
     }
     
@@ -175,7 +173,7 @@ class ParameterTimeLapseViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Section \(section)"
-    }
+    }*/
 
     /*
     // MARK: - Navigation
