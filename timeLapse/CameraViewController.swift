@@ -21,19 +21,21 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var numberPhotoTaken: Int = 0
     var videoOrientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait
     var timer = Timer()
+    var timerSecond = Timer()
     let settings = Settings()
     var timeLapseBuilder: TimeLapseBuilder?
     var videoName:[String] = []
     var orientation: UIImageOrientation = UIImageOrientation.right
+    var startTime = Date()
     
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var progressTimelapseCreation: UILabel!
-    
     @IBOutlet weak var videoLibrary: UIButton!
     @IBOutlet weak var progressViewTimelapseCreation: UIView!
-
+    @IBOutlet weak var captureProgressLabel: UILabel!
+    
     @available(iOS 4.0, *)
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
         print("capture did finish")
@@ -72,7 +74,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         print("Start capture")
         let interval: TimeInterval = Double(settings.interval)!
         updateCounter()
+        startTime = Date()
+         updateTime()
         timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: #selector(CameraViewController.updateCounter), userInfo: nil, repeats: true)
+        timerSecond = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.updateTime), userInfo: nil, repeats: true)
         
         capturePicture() // A VIRER
     }
@@ -90,12 +95,37 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
         print("Stop capture")
         timer.invalidate()
+        timerSecond.invalidate()
         buildTimeLapse()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         videoPreviewLayer!.frame = previewView.bounds
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        // Get the Document directory path
+        let documentDirectorPath:String = paths[0]
+        
+        // Create a new path for the new images folder
+        let imagesDirectoryPath = documentDirectorPath + "/ImagePicker"
+        // If the folder with the given path doesn't exist already, create it
+        do{
+            try FileManager.default.createDirectory(atPath: imagesDirectoryPath, withIntermediateDirectories: true, attributes: nil)
+        }catch{
+            print("Something went wrong while creating a new folder")
+        }
+        
+        // Create a new path for the new video folder
+        let videoDirectoryPath = documentDirectorPath + "/TimeLapseVideo"
+        // If the folder with the given path doesn't exist already, create it
+        do{
+            try FileManager.default.createDirectory(atPath: videoDirectoryPath, withIntermediateDirectories: true, attributes: nil)
+        }catch{
+            print("Something went wrong while creating a new folder")
+        }
+        
+        removeImages() // Delete images if exists
     }
     
     override func viewDidLoad() {
@@ -364,6 +394,35 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+    }
+    
+    func updateTime() {
         
+        var elapsedTime = Date().timeIntervalSince(startTime)
+        
+        //calculate hours
+        let hours = Int(elapsedTime / 3600.0)
+        elapsedTime -= TimeInterval(hours) * 3660
+        
+        //calculate minutes
+        let minutes = Int(elapsedTime / 60.0)
+        elapsedTime -= TimeInterval(minutes) * 60
+        
+        //calculate seconds
+        let seconds = Int(elapsedTime)
+        print("elapsedTime", elapsedTime)
+        //add the leading zero for minutes, seconds and millseconds and store them as string constants
+        
+        //let strHours = String(format: "%02d", hours)
+        let strMinutes = String(format: "%02d", minutes)
+        let strSeconds = String(format: "%02d", seconds)
+        print("strMinutes :", strMinutes)
+        
+        let resultMinutes = Int((numberPhotoTaken+1) / 30 / 60)
+        let resultSeconds = Int(((numberPhotoTaken+1) / 30) - (resultMinutes * 60))
+        let strResultMinutes = String(format: "%02d", resultMinutes)
+        let strResultSeconds = String(format: "%02d", resultSeconds)
+        
+        captureProgressLabel.text = "\(strMinutes):\(strSeconds) -> \(strResultMinutes):\(strResultSeconds)"
     }
 }

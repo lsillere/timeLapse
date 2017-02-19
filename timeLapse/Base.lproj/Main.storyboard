@@ -286,12 +286,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hL2-9q-RDp">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <gestureRecognizers/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTy-vp-3Vl">
+                                <rect key="frame" x="116" y="84" width="143" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94h-vc-KEy">
-                                <rect key="frame" x="292" y="74" width="57" height="30"/>
+                                <rect key="frame" x="292" y="84" width="57" height="30"/>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <segue destination="5q1-zR-xbL" kind="show" id="obX-Jg-gmZ"/>
@@ -304,17 +310,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1D1-s7-uWF">
-                                <rect key="frame" x="116" y="481" width="143" height="2"/>
+                                <rect key="frame" x="116" y="525" width="143" height="2"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bal-v7-krr">
-                                <rect key="frame" x="116" y="583" width="143" height="30"/>
+                                <rect key="frame" x="116" y="627" width="143" height="30"/>
                                 <state key="normal" image="play2"/>
                                 <connections>
                                     <action selector="takePhoto:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="y2b-BM-gfU"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-35-p4N">
-                                <rect key="frame" x="116" y="583" width="143" height="30"/>
+                                <rect key="frame" x="116" y="627" width="143" height="30"/>
                                 <state key="normal" image="stop2"/>
                                 <connections>
                                     <action selector="stopRecording:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="nkb-4c-A4P"/>
@@ -333,16 +339,19 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="bal-v7-krr" secondAttribute="trailing" constant="100" id="0RQ-KY-14v"/>
-                            <constraint firstItem="94h-vc-KEy" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" constant="10" id="Ctx-95-3Nm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="100" id="Ee9-GP-R2k"/>
                             <constraint firstItem="lu5-35-p4N" firstAttribute="top" secondItem="1D1-s7-uWF" secondAttribute="bottom" constant="100" id="Eni-cY-Cfm"/>
                             <constraint firstItem="hL2-9q-RDp" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leading" id="IIh-aK-sws"/>
+                            <constraint firstItem="YTy-vp-3Vl" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" constant="20" id="Md6-sl-q8G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="On6-eZ-g1g" secondAttribute="trailing" constant="100" id="MzQ-as-jg1"/>
+                            <constraint firstItem="94h-vc-KEy" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" constant="20" id="Ui0-Sk-hMY"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="wZy-RK-eax" secondAttribute="bottom" constant="10" id="V6Q-qz-m7N"/>
                             <constraint firstItem="On6-eZ-g1g" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="VdJ-XU-c6p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1D1-s7-uWF" secondAttribute="trailing" constant="100" id="WRq-sY-N96"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YTy-vp-3Vl" secondAttribute="trailing" constant="100" id="YU0-JH-REg"/>
                             <constraint firstItem="bal-v7-krr" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="ZN4-fz-ecB"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="lu5-35-p4N" secondAttribute="bottom" constant="10" id="aqM-QV-dZU"/>
+                            <constraint firstItem="YTy-vp-3Vl" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="100" id="auJ-Zm-WdD"/>
                             <constraint firstItem="wZy-RK-eax" firstAttribute="height" secondItem="lu5-35-p4N" secondAttribute="height" id="axw-Zi-I9T"/>
                             <constraint firstItem="wZy-RK-eax" firstAttribute="leading" secondItem="FTd-dA-qdU" secondAttribute="leadingMargin" constant="20" id="bKk-bf-cOw"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="hL2-9q-RDp" secondAttribute="bottom" id="bqf-rF-LZW"/>
@@ -352,6 +361,7 @@
                             <constraint firstAttribute="trailing" secondItem="hL2-9q-RDp" secondAttribute="trailing" id="hTO-gf-szM"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="bal-v7-krr" secondAttribute="bottom" constant="10" id="lDB-dr-RuP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="94h-vc-KEy" secondAttribute="trailing" constant="10" id="pHO-O6-awO"/>
+                            <constraint firstItem="YTy-vp-3Vl" firstAttribute="height" secondItem="94h-vc-KEy" secondAttribute="height" id="rst-0W-qwr"/>
                             <constraint firstItem="lu5-35-p4N" firstAttribute="width" secondItem="bal-v7-krr" secondAttribute="width" id="uL2-mn-GLd"/>
                             <constraint firstItem="hL2-9q-RDp" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" id="w1t-nj-9Ya"/>
                             <constraint firstItem="1D1-s7-uWF" firstAttribute="top" secondItem="On6-eZ-g1g" secondAttribute="bottom" constant="20" id="zCD-O2-59L"/>
@@ -359,6 +369,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wbZ-Os-lft"/>
                     <connections>
+                        <outlet property="captureProgressLabel" destination="YTy-vp-3Vl" id="iLy-vY-cem"/>
                         <outlet property="previewView" destination="hL2-9q-RDp" id="8LD-Ny-zHp"/>
                         <outlet property="progressTimelapseCreation" destination="On6-eZ-g1g" id="YTp-Ec-IAK"/>
                         <outlet property="progressViewTimelapseCreation" destination="hL2-9q-RDp" id="Uhs-yi-j6D"/>
@@ -375,7 +386,7 @@
         <scene sceneID="QUM-qY-1sw">
             <objects>
                 <collectionViewController id="9dM-dZ-Qcn" customClass="VideoListCollectionViewController" customModule="timeLapse" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="ETm-jv-DwU">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ETm-jv-DwU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
