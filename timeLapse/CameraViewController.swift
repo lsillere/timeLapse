@@ -34,6 +34,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet weak var progressTimelapseCreation: UILabel!
     @IBOutlet weak var videoLibrary: UIButton!
     @IBOutlet weak var progressViewTimelapseCreation: UIView!
+    @IBOutlet weak var arrowLabel: UILabel!
+    @IBOutlet weak var timeProgressLabel: UILabel!
     @IBOutlet weak var captureProgressLabel: UILabel!
     
     @available(iOS 4.0, *)
@@ -70,12 +72,15 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.shootButton.isHidden = true
         self.stopButton.isEnabled = true
         self.stopButton.isHidden = false
+        self.arrowLabel.isHidden = false
+        self.timeProgressLabel.isHidden = false
+        self.captureProgressLabel.isHidden = false
         
         print("Start capture")
         let interval: TimeInterval = Double(settings.interval)!
         updateCounter()
         startTime = Date()
-         updateTime()
+        updateTime()
         timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: #selector(CameraViewController.updateCounter), userInfo: nil, repeats: true)
         timerSecond = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.updateTime), userInfo: nil, repeats: true)
         
@@ -99,10 +104,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         buildTimeLapse()
     }
     
+    // Hide status bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         videoPreviewLayer!.frame = previewView.bounds
         
+        arrowLabel.backgroundColor = UIColor(patternImage: UIImage(named: "ico-time")!)
+        
+        /* -------------------------- Create images and videos folder --------------------------- */
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         // Get the Document directory path
         let documentDirectorPath:String = paths[0]
@@ -124,7 +137,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }catch{
             print("Something went wrong while creating a new folder")
         }
-        
+        /* ------------------------------------------------------------------------------------- */
+ 
         removeImages() // Delete images if exists
     }
     
@@ -147,7 +161,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         /*For video
         session?.sessionPreset = AVCaptureSessionPresetHigh*/
         let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        
         
         var error: NSError?
         var input: AVCaptureDeviceInput!
@@ -423,6 +436,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         let strResultMinutes = String(format: "%02d", resultMinutes)
         let strResultSeconds = String(format: "%02d", resultSeconds)
         
-        captureProgressLabel.text = "\(strMinutes):\(strSeconds) -> \(strResultMinutes):\(strResultSeconds)"
+        timeProgressLabel.text = "\(strMinutes):\(strSeconds)"
+        captureProgressLabel.text = "\(strResultMinutes):\(strResultSeconds)"
+        
     }
 }
