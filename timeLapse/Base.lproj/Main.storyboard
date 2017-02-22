@@ -348,8 +348,8 @@
                                     <action selector="stopRecording:" destination="8Jz-2B-OAG" eventType="touchUpInside" id="nkb-4c-A4P"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZy-RK-eax">
-                                <rect key="frame" x="36" y="567" width="46" height="40"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZy-RK-eax">
+                                <rect key="frame" x="36" y="567" width="54" height="40"/>
                                 <state key="normal" title="Button" backgroundImage="ico-galery">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>

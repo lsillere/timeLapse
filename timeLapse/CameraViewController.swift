@@ -144,11 +144,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let videoCount = getVideoCount()
-        
         videoLibrary.isHidden = false
-        videoLibrary.setTitle(String(videoCount), for: .normal)
         print("VideoQuality \(settings.videoQuality)")
         print("Interval \(settings.interval)")
         print("viewwillload")
@@ -156,6 +152,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        let videoCount = getVideoCount()
+        videoLibrary.setTitle(String(videoCount), for: .normal)
         
         cameraOutput = AVCapturePhotoOutput()
         
@@ -392,12 +390,15 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         },
             success: { url in
                 NSLog("Output written to \(url)")
-                // Save nombre vidéo enregistrés
+                // remove images for memory
                 print("Remove images")
                 self.removeImages()
-                let videoCount = self.getVideoCount()
-                print("Videocoutn : ",videoCount)
-                self.videoLibrary.setTitle(String(videoCount), for: .normal)
+                
+                // update video number in link to video library
+                DispatchQueue.main.async {
+                    let videoCount = self.getVideoCount()
+                    self.videoLibrary.setTitle(String(videoCount), for: .normal)
+                }
         },
             failure: { error in
                 NSLog("failure: \(error)")
