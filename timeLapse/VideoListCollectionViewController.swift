@@ -22,7 +22,8 @@ class VideoListCollectionViewController: UICollectionViewController {
     var edit:Bool = false
     
     @IBOutlet var videoCollectionView: UICollectionView!
-    @IBOutlet weak var deleteBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var editBarButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         directoryContents = getVideoUrl()
@@ -53,7 +54,8 @@ class VideoListCollectionViewController: UICollectionViewController {
         if(edit == false) {
             edit = true
             print("edit")
-            deleteBarButtonItem.isEnabled = true
+            self.navigationController?.setToolbarHidden(false, animated: false)
+            editBarButton.title = "Cancel"
         } else {
             edit = false
             if !selectedPhotos.isEmpty {
@@ -61,11 +63,13 @@ class VideoListCollectionViewController: UICollectionViewController {
                 print("remove selected photo")
                 deselectAllvideo()
             }
+            editBarButton.title = "Edit"
+            self.navigationController?.setToolbarHidden(true, animated: false)
             print("cancel")
         }
     }
 
-    @IBAction func deleteBarButton(_ sender: UIBarButtonItem) {
+    /*@IBAction func deleteBarButton(_ sender: UIBarButtonItem) {
         if !selectedPhotos.isEmpty {
             print("delete")
             edit = false
@@ -83,6 +87,29 @@ class VideoListCollectionViewController: UICollectionViewController {
             
             directoryContents = getVideoUrl()
             collectionView?.reloadData()
+            
+            editBarButton.title = "Edit"
+        }
+    }*/
+    @IBAction func deleteVideoBarButton(_ sender: UIBarButtonItem) {
+        if !selectedPhotos.isEmpty {
+            print("delete")
+            edit = false
+            
+            // Delete video
+            for video in selectedPhotos {
+                removeVideoIfExist(videoOutputURL: video)
+            }
+            
+            // Clear seletVideoo list
+            selectedPhotos = [URL]()
+            
+            deselectAllvideo()
+            
+            directoryContents = getVideoUrl()
+            collectionView?.reloadData()
+            
+            editBarButton.title = "Edit"
         }
     }
     
@@ -114,9 +141,13 @@ class VideoListCollectionViewController: UICollectionViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    // MARK: UICollectionViewDataSource
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setToolbarHidden(true, animated: false)
+        super.viewWillDisappear(animated)
+    }
+    
+        
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
