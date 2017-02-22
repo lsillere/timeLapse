@@ -13,7 +13,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var session: AVCaptureSession?
     /* For video
      let cameraOutput: AVCaptureMovieFileOutput? = AVCaptureMovieFileOutput()*/
-    let cameraOutput: AVCapturePhotoOutput? = AVCapturePhotoOutput()
+    var cameraOutput: AVCapturePhotoOutput? = AVCapturePhotoOutput()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var sessionOutputSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecJPEG]);
     var videoOutputURL: URL?
@@ -144,19 +144,26 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        videoNumber = settings.videoNumber
+
+        let videoCount = getVideoCount()
+        
         videoLibrary.isHidden = false
-        videoLibrary.setTitle(String(videoNumber), for: .normal)
+        videoLibrary.setTitle(String(videoCount), for: .normal)
         print("VideoQuality \(settings.videoQuality)")
         print("Interval \(settings.interval)")
+        print("viewwillload")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        cameraOutput = AVCapturePhotoOutput()
+        
         super.viewWillAppear(animated)
+        print("viewwillappear")
+        videoNumber = settings.videoNumber
         
         session = AVCaptureSession()
-
         
         /*For video
         session?.sessionPreset = AVCaptureSessionPresetHigh*/
@@ -343,7 +350,22 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         return contentsPath
     }
+    
+    func getVideoCount() -> Int {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let videoDirectoryPath = documentsPath[0] + "/TimeLapseVideo/"
+        let videoCount: Int
+        
+        do {
+            videoCount = try FileManager.default.contentsOfDirectory(atPath: videoDirectoryPath).count
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            videoCount = 0
+        }
 
+        return videoCount
+    }
+    
     func buildTimeLapse() {
         // affichage progression
         self.progressViewTimelapseCreation.isHidden = false
@@ -353,7 +375,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         print("video Number : ", settings.videoNumber)*/
         let photoPath = getPhotosPath()
         
-        self.timeLapseBuilder?.removeVideoIfExist()
         self.timeLapseBuilder = TimeLapseBuilder(photoURLs: photoPath, orientation: orientation, videoNumber: settings.videoNumber)
         
         self.settings.videoNumber += 1
@@ -368,19 +389,15 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                     let progressPercentageText:String = String(progressPercentage*100) + "%"
                     self.progressTimelapseCreation.text = progressPercentageText
                 }
-                /*dispatch_get_main_queue().asynchronously(execute: {
-                 let progressPercentage = Float(progress.completedUnitCount) / Float(progress.totalUnitCount)
-                 progressHUD.setProgress(progressPercentage, animated: true)
-                 })*/
         },
             success: { url in
                 NSLog("Output written to \(url)")
-                /*dispatch_async(dispatch_get_main_queue(), {
-                 //progressHUD.dismiss()
-                 })*/
                 // Save nombre vidéo enregistrés
                 print("Remove images")
                 self.removeImages()
+                let videoCount = self.getVideoCount()
+                print("Videocoutn : ",videoCount)
+                self.videoLibrary.setTitle(String(videoCount), for: .normal)
         },
             failure: { error in
                 NSLog("failure: \(error)")
@@ -423,13 +440,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         //calculate seconds
         let seconds = Int(elapsedTime)
-        print("elapsedTime", elapsedTime)
         //add the leading zero for minutes, seconds and millseconds and store them as string constants
         
         //let strHours = String(format: "%02d", hours)
         let strMinutes = String(format: "%02d", minutes)
         let strSeconds = String(format: "%02d", seconds)
-        print("strMinutes :", strMinutes)
         
         let resultMinutes = Int((numberPhotoTaken+1) / 30 / 60)
         let resultSeconds = Int(((numberPhotoTaken+1) / 30) - (resultMinutes * 60))

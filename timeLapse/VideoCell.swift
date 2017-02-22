@@ -11,4 +11,16 @@ import UIKit
 class VideoCell: UICollectionViewCell {
     
     @IBOutlet weak var imageViewCell: UIImageView!
+    
+    override var isSelected: Bool {
+        didSet {
+            imageViewCell.layer.borderWidth = isSelected ? 2 : 0
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        imageViewCell.layer.borderColor = UIColor.blue.cgColor
+        isSelected = false
+    }
 }

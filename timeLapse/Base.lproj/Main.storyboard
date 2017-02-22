@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -455,6 +456,24 @@
                             <outlet property="delegate" destination="9dM-dZ-Qcn" id="4WM-bR-1Rd"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="aBq-Ad-Cui">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="abo-sc-0c5">
+                                <connections>
+                                    <action selector="editBarButton:" destination="9dM-dZ-Qcn" id="La2-oJ-KvU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" systemItem="trash" id="KUV-gu-elK">
+                                <connections>
+                                    <action selector="deleteBarButton:" destination="9dM-dZ-Qcn" id="Ie4-La-pGG"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="deleteBarButtonItem" destination="KUV-gu-elK" id="1ar-d4-0WI"/>
+                        <outlet property="videoCollectionView" destination="ETm-jv-DwU" id="I9E-Ql-E4D"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fT3-Ch-1af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -534,7 +553,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BYi-8m-PlE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jRa-jt-iTp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jRa-jt-iTp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.59410375356674194" green="0.77544736862182617" blue="0.69575637578964233" alpha="1" colorSpace="deviceRGB"/>
