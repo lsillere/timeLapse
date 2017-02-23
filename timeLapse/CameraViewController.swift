@@ -24,9 +24,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var timerSecond = Timer()
     let settings = Settings()
     var timeLapseBuilder: TimeLapseBuilder?
+    var timerSubview = Timer()
     var videoName:[String] = []
     var orientation: UIImageOrientation = UIImageOrientation.right
     var startTime = Date()
+    var backCamera: AVCaptureDevice?
     
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -167,7 +169,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         /*For video
         session?.sessionPreset = AVCaptureSessionPresetHigh*/
-        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         var error: NSError?
         var input: AVCaptureDeviceInput!
@@ -301,6 +303,52 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateVideoOrientationForDeviceOrienration()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        //touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touchPoint = touches.first! as UITouch
+        let screenSize = previewView.bounds.size
+        let focusPoint = CGPoint(x: (touchPoint.location(in: previewView).y / screenSize.height), y: (1.0 - touchPoint.location(in: previewView).x / screenSize.width))
+        
+        if let device = backCamera {
+            do {
+                try device.lockForConfiguration()
+            } catch {
+                print("error autofocus not critical")
+                return
+            }
+            if device.isFocusPointOfInterestSupported {
+                device.focusPointOfInterest = focusPoint
+                device.focusMode = AVCaptureFocusMode.autoFocus
+            }
+            if device.isExposurePointOfInterestSupported {
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureExposureMode.autoExpose
+            }
+            device.unlockForConfiguration()
+            
+            /*------------------- Add imageview to show where focus is made ------------------- */
+            /*removeSubview()
+            var imageViewShow : UIImageView
+            //print(" focusPoint : ", focusPoint, screenSize.width, screenSize.height)
+            imageViewShow  = UIImageView(frame:CGRect(x: (1-focusPoint.y) * screenSize.width, y: focusPoint.x * screenSize.height, width: 60, height: 60))
+            imageViewShow.image = UIImage(named:"ico-galery.png")
+            imageViewShow.tag = 1
+            self.view.addSubview(imageViewShow)
+            timerSubview = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.removeSubview), userInfo: nil, repeats: true)*/
+        }
+    }
+    
+    func removeSubview() {
+        timerSubview.invalidate()
+        
+        if let viewWithTag = self.view.viewWithTag(1) {
+            viewWithTag.removeFromSuperview()
+        } else {
+            print("View doesn't exist")
+        }
     }
     
     func updateCounter() {
