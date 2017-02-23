@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, AVCapturePhotoCaptureDelegate {
     var session: AVCaptureSession?
@@ -505,5 +506,44 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         timeProgressLabel.text = "\(strMinutes):\(strSeconds)"
         captureProgressLabel.text = "\(strResultMinutes):\(strResultSeconds)"
         
+    }
+    
+    
+    func saveVideoToGallery(videoURL: URL) {
+        var videoAssetPlaceholder: PHObjectPlaceholder!
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
+            videoAssetPlaceholder = request!.placeholderForCreatedAsset
+        }, completionHandler: { (success, error) in
+            if success {
+                let localID = videoAssetPlaceholder.localIdentifier
+                print("saved : ", localID)
+                let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                if result.firstObject!.mediaType == .video {
+                    PHImageManager.default().requestAVAsset(forVideo: result.firstObject!, options: nil, resultHandler: {(asset: AVAsset?,_,_) in
+                        
+                        if let urlAsset = asset as? AVURLAsset {
+                            let localVideoUrl = urlAsset.url as NSURL
+                            
+                            print("URL : ", localVideoUrl)
+                            //completionHandler(responseURL : localVideoUrl)
+                            
+                            /* let player = AVPlayer(url: localVideoUrl as URL)
+                            let playerViewController = AVPlayerViewController()
+                            playerViewController.player = player
+                            self.present(playerViewController, animated: true) {
+                                playerViewController.player!.play()
+                            }*/
+                            
+                        } else {
+                            //completionHandler(responseURL : nil)
+                        }
+                    })
+                }
+            }
+            else {
+                print("error")
+            }
+        })
     }
 }

@@ -103,12 +103,35 @@ class VideoListCollectionViewController: UICollectionViewController {
             var savedVideosNumber = 0
             
             for video in selectedVideos {
+                var videoAssetPlaceholder: PHObjectPlaceholder!
                 PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: video)
+                    let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: video)
+                    videoAssetPlaceholder = request!.placeholderForCreatedAsset
                 }, completionHandler: { (success, error) in
                     if success {
-                        print("saved")
+                        let localID = videoAssetPlaceholder.localIdentifier
+                        print("saved : ", localID)
                         savedVideosNumber += 1
+                        /* let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                        PHImageManager.default().requestAVAsset(forVideo: result.firstObject!, options: nil, resultHandler: {(asset: AVAsset?,_,_) in
+                            
+                            if let urlAsset = asset as? AVURLAsset {
+                                let localVideoUrl = urlAsset.url as NSURL
+                                
+                                print("URL : ", localVideoUrl)
+                                //completionHandler(responseURL : localVideoUrl)
+                                
+                                let player = AVPlayer(url: localVideoUrl as URL)
+                                let playerViewController = AVPlayerViewController()
+                                playerViewController.player = player
+                                self.present(playerViewController, animated: true) {
+                                    playerViewController.player!.play()
+                                }
+
+                            } else {
+                                //completionHandler(responseURL : nil)
+                            }
+                        })*/
                     }
                     else {
                         print("error")
@@ -130,7 +153,6 @@ class VideoListCollectionViewController: UICollectionViewController {
             
             deselectAllvideo()
             directoryContents = getVideoUrl()
-            collectionView?.reloadData()
             
             self.navigationController?.setToolbarHidden(true, animated: false)
             editBarButton.title = "Edit"

@@ -456,15 +456,15 @@
                         </connections>
                     </collectionView>
                     <toolbarItems>
-                        <barButtonItem systemItem="trash" id="WYS-GP-OaA">
-                            <connections>
-                                <action selector="deleteVideoBarButton:" destination="9dM-dZ-Qcn" id="Sll-0C-MXM"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NbZ-Rn-Tg7"/>
                         <barButtonItem systemItem="save" id="BeF-AN-2Pa">
                             <connections>
                                 <action selector="saveVideo:" destination="9dM-dZ-Qcn" id="Ga3-Cf-Hhk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NbZ-Rn-Tg7"/>
+                        <barButtonItem systemItem="trash" id="WYS-GP-OaA">
+                            <connections>
+                                <action selector="deleteVideoBarButton:" destination="9dM-dZ-Qcn" id="Sll-0C-MXM"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
