@@ -14,13 +14,14 @@ class VideoCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            imageViewCell.layer.borderWidth = isSelected ? 2 : 0
+            imageViewCell.layer.borderWidth = isSelected ? 4 : 0
+            imageViewCell.alpha = isSelected ? 0.6 : 1
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageViewCell.layer.borderColor = UIColor.blue.cgColor
+        imageViewCell.layer.borderColor = UIColor(red: 151/255, green: 198/255, blue: 177/255, alpha: 1).cgColor
         isSelected = false
     }
 }

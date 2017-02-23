@@ -235,7 +235,7 @@
                                     <segment title="Moyenne"/>
                                     <segment title="Rapide"/>
                                 </segments>
-                                <color key="tintColor" red="0.52941176469999995" green="0.73333333329999995" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.59410375356674194" green="0.77544736862182617" blue="0.69575637578964233" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <action selector="vitessSegmentedControll:" destination="5q1-zR-xbL" eventType="valueChanged" id="iCF-PC-IzX"/>
                                 </connections>
@@ -318,7 +318,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94h-vc-KEy">
-                                <rect key="frame" x="299" y="84" width="40" height="40"/>
+                                <rect key="frame" x="315" y="84" width="40" height="40"/>
                                 <state key="normal" image="ico-setting"/>
                                 <connections>
                                     <segue destination="5q1-zR-xbL" kind="show" id="obX-Jg-gmZ"/>
@@ -361,6 +361,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="bal-v7-krr" secondAttribute="trailing" constant="100" id="0RQ-KY-14v"/>
+                            <constraint firstAttribute="trailing" secondItem="94h-vc-KEy" secondAttribute="trailing" constant="20" id="5tQ-4g-ejR"/>
                             <constraint firstItem="uO0-ay-dI7" firstAttribute="height" secondItem="94h-vc-KEy" secondAttribute="height" id="A6K-2N-ZyF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lu5-35-p4N" secondAttribute="trailing" constant="100" id="Ee9-GP-R2k"/>
                             <constraint firstItem="lu5-35-p4N" firstAttribute="top" secondItem="1D1-s7-uWF" secondAttribute="bottom" constant="100" id="Eni-cY-Cfm"/>
@@ -385,7 +386,6 @@
                             <constraint firstItem="uO0-ay-dI7" firstAttribute="width" secondItem="YTy-vp-3Vl" secondAttribute="width" id="l04-fr-RA9"/>
                             <constraint firstItem="olL-qR-l7F" firstAttribute="top" secondItem="bal-v7-krr" secondAttribute="bottom" constant="40" id="lDB-dr-RuP"/>
                             <constraint firstItem="uO0-ay-dI7" firstAttribute="height" secondItem="YTy-vp-3Vl" secondAttribute="height" id="ok8-r5-sx1"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="94h-vc-KEy" secondAttribute="trailing" constant="20" id="pHO-O6-awO"/>
                             <constraint firstItem="YTy-vp-3Vl" firstAttribute="height" secondItem="94h-vc-KEy" secondAttribute="height" id="rst-0W-qwr"/>
                             <constraint firstItem="lu5-35-p4N" firstAttribute="width" secondItem="bal-v7-krr" secondAttribute="width" id="uL2-mn-GLd"/>
                             <constraint firstItem="hL2-9q-RDp" firstAttribute="top" secondItem="tsq-zL-WmW" secondAttribute="bottom" id="w1t-nj-9Ya"/>
@@ -415,7 +415,7 @@
         <scene sceneID="QUM-qY-1sw">
             <objects>
                 <collectionViewController id="9dM-dZ-Qcn" customClass="VideoListCollectionViewController" customModule="timeLapse" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ETm-jv-DwU">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="ETm-jv-DwU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -459,6 +459,12 @@
                         <barButtonItem systemItem="trash" id="WYS-GP-OaA">
                             <connections>
                                 <action selector="deleteVideoBarButton:" destination="9dM-dZ-Qcn" id="Sll-0C-MXM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NbZ-Rn-Tg7"/>
+                        <barButtonItem systemItem="save" id="BeF-AN-2Pa">
+                            <connections>
+                                <action selector="saveVideo:" destination="9dM-dZ-Qcn" id="Ga3-Cf-Hhk"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>

@@ -94,10 +94,6 @@ class ParameterTimeLapseViewController: UIViewController/*, UITableViewDelegate,
         videoQuality = settings.videoQuality
         interval = settings.interval*/
         
-        // Navigation bar customization
-        let nav = self.navigationController?.navigationBar
-        nav?.tintColor = UIColor.black
-        
         switch settings.videoQuality {
         case "480p":
             segmentedControl.selectedSegmentIndex = 0

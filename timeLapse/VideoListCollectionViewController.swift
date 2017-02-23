@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Photos
 
 private let reuseIdentifier = "VideoCell"
 private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 50.0, right: 5.0)
@@ -18,12 +19,13 @@ class VideoListCollectionViewController: UICollectionViewController {
     
     var directoryContents = [URL]()
     var cellSize: Int = 0
-    var selectedPhotos = [URL]()
+    var selectedVideos = [URL]()
     var edit:Bool = false
     
     @IBOutlet var videoCollectionView: UICollectionView!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
-    
+
+    @IBOutlet weak var saveBarButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         directoryContents = getVideoUrl()
@@ -58,60 +60,86 @@ class VideoListCollectionViewController: UICollectionViewController {
             editBarButton.title = "Cancel"
         } else {
             edit = false
-            if !selectedPhotos.isEmpty {
-                selectedPhotos = [URL]()
+            if !selectedVideos.isEmpty {
+                selectedVideos = [URL]()
                 print("remove selected photo")
                 deselectAllvideo()
             }
+            
             editBarButton.title = "Edit"
             self.navigationController?.setToolbarHidden(true, animated: false)
             print("cancel")
         }
     }
 
-    /*@IBAction func deleteBarButton(_ sender: UIBarButtonItem) {
-        if !selectedPhotos.isEmpty {
-            print("delete")
-            edit = false
-            
-            // Delete video
-            for video in selectedPhotos {
-                removeVideoIfExist(videoOutputURL: video)
-            }
-            
-            // Clear seletVideoo list
-            selectedPhotos = [URL]()
-
-            deselectAllvideo()
-            deleteBarButtonItem.isEnabled = false
-            
-            directoryContents = getVideoUrl()
-            collectionView?.reloadData()
-            
-            editBarButton.title = "Edit"
-        }
-    }*/
     @IBAction func deleteVideoBarButton(_ sender: UIBarButtonItem) {
-        if !selectedPhotos.isEmpty {
+        if !selectedVideos.isEmpty {
             print("delete")
             edit = false
             
             // Delete video
-            for video in selectedPhotos {
+            for video in selectedVideos {
                 removeVideoIfExist(videoOutputURL: video)
             }
             
-            // Clear seletVideoo list
-            selectedPhotos = [URL]()
+            // Clear selectVideoo list
+            selectedVideos = [URL]()
             
             deselectAllvideo()
             
             directoryContents = getVideoUrl()
             collectionView?.reloadData()
             
+            self.navigationController?.setToolbarHidden(true, animated: false)
             editBarButton.title = "Edit"
         }
     }
+    
+    @IBAction func saveVideo(_ sender: UIBarButtonItem) {
+        if !selectedVideos.isEmpty {
+            print("save")
+            edit = false
+            
+            // Save video
+            var savedVideosNumber = 0
+            
+            for video in selectedVideos {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: video)
+                }, completionHandler: { (success, error) in
+                    if success {
+                        print("saved")
+                        savedVideosNumber += 1
+                    }
+                    else {
+                        print("error")
+                    }
+                })
+            }
+            
+            /*if savedVideosNumber == 1 {
+                self.showAlert(title: "Saved !", message: "Votre vidéo a bien été sauvegardée")
+            } else if savedVideosNumber > 1 {
+                self.showAlert(title: "Saved !", message: "Vos vidéos ont bien été sauvegardées")
+            }
+            }*/
+            showAlert(title: "Saved !", message: "La vidéo a bien été sauvegardée")
+                // Clear selectVideoo list
+            selectedVideos = [URL]()
+            
+        
+            
+            deselectAllvideo()
+            directoryContents = getVideoUrl()
+            collectionView?.reloadData()
+            
+            self.navigationController?.setToolbarHidden(true, animated: false)
+            editBarButton.title = "Edit"
+            
+        }
+
+    }
+    
     
     func getVideoUrl() -> [URL] {
         var  directoryContents = [URL]()
@@ -200,7 +228,7 @@ class VideoListCollectionViewController: UICollectionViewController {
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if(edit == true) {
-            print(selectedPhotos)
+            print(selectedVideos)
             
             return true
         } else {
@@ -212,9 +240,9 @@ class VideoListCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  didSelectItemAt indexPath: IndexPath) {
         if(edit == true) {
-            selectedPhotos.append(directoryContents[indexPath.row])
+            selectedVideos.append(directoryContents[indexPath.row])
             
-            print(selectedPhotos)
+            print(selectedVideos)
             print("select")
         }
     }
@@ -222,11 +250,11 @@ class VideoListCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  didDeselectItemAt indexPath: IndexPath) {
         if(edit == true) {
-            if let indexOfvideo = selectedPhotos.index(of: directoryContents[indexPath.row]) {
-                selectedPhotos.remove(at: indexOfvideo)
+            if let indexOfvideo = selectedVideos.index(of: directoryContents[indexPath.row]) {
+                selectedVideos.remove(at: indexOfvideo)
             }
             
-            print(selectedPhotos)
+            print(selectedVideos)
             print("deselect")
         }
     }
@@ -316,5 +344,13 @@ extension VideoListCollectionViewController : UICollectionViewDelegateFlowLayout
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+    
+    func showAlert(title:String, message: String) {
+        let alertController = UIAlertController(title: title, message:
+            message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }
