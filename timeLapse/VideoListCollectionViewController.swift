@@ -24,8 +24,7 @@ class VideoListCollectionViewController: UICollectionViewController {
     
     @IBOutlet var videoCollectionView: UICollectionView!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
-
-    @IBOutlet weak var saveBarButton: UIBarButtonItem!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         directoryContents = getVideoUrl()

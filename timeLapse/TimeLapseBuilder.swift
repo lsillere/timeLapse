@@ -18,6 +18,7 @@ class TimeLapseBuilder: NSObject {
     var videoWriter: AVAssetWriter?
     let orientation: UIImageOrientation
     var videoNumber: Int
+    let settings = Settings()
     
     let inputSize: CGSize
     let outputSize: CGSize
@@ -38,19 +39,32 @@ class TimeLapseBuilder: NSObject {
         self.orientation = orientation
         self.videoNumber = videoNumber
         
+        let width: Int
+        let height: Int
+        
+        switch settings.videoQuality {
+        case "720p":
+            width = 1280
+            height = 720
+        case "480p":
+            width = 720
+            height = 483
+        default:
+            width = 1920
+            height = 1080
+        }
+        
         // Video dimension based on photos orientation
         if(orientation == UIImageOrientation.up || orientation == UIImageOrientation.down) {
             /*inputSize = CGSize(width: 4032, height: 3024)
              outputSize = CGSize(width: 1280, height: 720)*/
             self.inputSize = CGSize(width: 1920, height: 1080)
-            self.outputSize = CGSize(width: 1920, height: 1080)
-            print("orientation UP/Down")
+            self.outputSize = CGSize(width: width, height: height)
         } else {
             /*inputSize = CGSize(width: 3024, height: 4032)
              outputSize = CGSize(width: 3024/3, height: 4032/3)*/
             self.inputSize = CGSize(width: 1080, height: 1920)
-            self.outputSize = CGSize(width: 1080, height: 1920)
-            print("orientation right/left")
+            self.outputSize = CGSize(width: height, height: width)
         }
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
@@ -241,17 +255,17 @@ class TimeLapseBuilder: NSObject {
         case .down, .downMirrored:
             transform = transform.translatedBy(x: image.size.width, y: image.size.height)
             transform = transform.rotated(by: CGFloat(M_PI))
-            print("down")
+            //print("down")
         case .left, .leftMirrored:
             transform = transform.translatedBy(x: image.size.width, y: 0)
             transform = transform.rotated(by: CGFloat(M_PI_2))
-            print("left")
+            //print("left")
         case .right, .rightMirrored:
             transform = transform.translatedBy(x: 0, y: image.size.height)
             transform = transform.rotated(by: CGFloat(-M_PI_2))
-            print("right")
+            //print("right")
         case .up, .upMirrored:
-            print("up")
+            //print("up")
             break
         }
         

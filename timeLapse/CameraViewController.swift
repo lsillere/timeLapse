@@ -157,10 +157,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         let videoCount = getVideoCount()
         videoLibrary.setTitle(String(videoCount), for: .normal)
-        
+        super.viewWillAppear(animated)
         cameraOutput = AVCapturePhotoOutput()
         
-        super.viewWillAppear(animated)
+        
         videoNumber = settings.videoNumber
         
         session = AVCaptureSession()
