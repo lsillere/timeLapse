@@ -191,10 +191,10 @@ class VideoListCollectionViewController: UICollectionViewController {
     }
     */
     
-    override func viewWillDisappear(_ animated: Bool) {
+    /*override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setToolbarHidden(true, animated: false)
         super.viewWillDisappear(animated)
-    }
+    }*/
     
         
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

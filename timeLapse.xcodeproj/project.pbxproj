@@ -23,6 +23,7 @@
 		76631EAE1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAD1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift */; };
 		76631EB01DE9CFAD0065EE50 /* TimeLapseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */; };
 		766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */; };
+		769C84431E6206CD00192A11 /* CreateTimeLapseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769C84421E6206CD00192A11 /* CreateTimeLapseViewController.swift */; };
 		76A97EB61E5F7249000292C3 /* timeLapse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76A97EB41E5F7249000292C3 /* timeLapse.xcdatamodeld */; };
 		76F7AC7D1E47C597009E19DA /* VideoListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F7AC7C1E47C597009E19DA /* VideoListCollectionViewController.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		76631EAD1DE9A4F90065EE50 /* OLDBuildTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDBuildTimeLapseViewController.swift; sourceTree = "<group>"; };
 		76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLapseBuilder.swift; sourceTree = "<group>"; };
 		766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterTimeLapseViewController.swift; sourceTree = "<group>"; };
+		769C84421E6206CD00192A11 /* CreateTimeLapseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTimeLapseViewController.swift; sourceTree = "<group>"; };
 		76A97EB51E5F7249000292C3 /* timeLapse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = timeLapse.xcdatamodel; sourceTree = "<group>"; };
 		76F7AC7C1E47C597009E19DA /* VideoListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoListCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +109,6 @@
 		76631E6D1DE7B9F20065EE50 = {
 			isa = PBXGroup;
 			children = (
-				76A97EB41E5F7249000292C3 /* timeLapse.xcdatamodeld */,
 				76631EA71DE8595B0065EE50 /* CustomOverlayViewController.swift */,
 				76631EA81DE8595B0065EE50 /* CustomOverlayViewController.xib */,
 				76631EAB1DE859780065EE50 /* CustomOverlayView.swift */,
@@ -134,6 +135,7 @@
 				76631E791DE7B9F20065EE50 /* AppDelegate.swift */,
 				76631E7B1DE7B9F20065EE50 /* TestViewController.swift */,
 				76631E7D1DE7B9F20065EE50 /* Main.storyboard */,
+				769C84421E6206CD00192A11 /* CreateTimeLapseViewController.swift */,
 				760F91021E4B8E14007C73A8 /* CameraViewController.swift */,
 				766695FB1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift */,
 				76631EAF1DE9CFAD0065EE50 /* TimeLapseBuilder.swift */,
@@ -143,6 +145,7 @@
 				76631E801DE7B9F20065EE50 /* Assets.xcassets */,
 				76631E821DE7B9F20065EE50 /* LaunchScreen.storyboard */,
 				76631E851DE7B9F20065EE50 /* Info.plist */,
+				76A97EB41E5F7249000292C3 /* timeLapse.xcdatamodeld */,
 				764CD0071E43A4900083E1EE /* Model */,
 			);
 			path = timeLapse;
@@ -313,6 +316,7 @@
 				766695FC1DEF99CA005F7E16 /* ParameterTimeLapseViewController.swift in Sources */,
 				76631EAC1DE859780065EE50 /* CustomOverlayView.swift in Sources */,
 				76631E7A1DE7B9F20065EE50 /* AppDelegate.swift in Sources */,
+				769C84431E6206CD00192A11 /* CreateTimeLapseViewController.swift in Sources */,
 				76F7AC7D1E47C597009E19DA /* VideoListCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,7 +461,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -594,7 +598,7 @@
 			);
 			currentVersion = 76A97EB51E5F7249000292C3 /* timeLapse.xcdatamodel */;
 			path = timeLapse.xcdatamodeld;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */

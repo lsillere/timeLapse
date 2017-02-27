@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Photos
+import CoreData
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, AVCapturePhotoCaptureDelegate {
     var session: AVCaptureSession?
@@ -30,6 +31,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var orientation: UIImageOrientation = UIImageOrientation.right
     var startTime = Date()
     var backCamera: AVCaptureDevice?
+    
+    var videoURL: [NSManagedObject] = []
     
     @IBOutlet weak var shootButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -87,7 +90,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: #selector(CameraViewController.updateCounter), userInfo: nil, repeats: true)
         timerSecond = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.updateTime), userInfo: nil, repeats: true)
         
-        capturePicture() // A VIRER
+        capturePicture()
     }
     
     @IBAction func stopRecording(_ sender: UIButton) {
@@ -104,7 +107,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         print("Stop capture")
         timer.invalidate()
         timerSecond.invalidate()
-        buildTimeLapse()
+        //buildTimeLapse()
+        
+        self.performSegue(withIdentifier: "goToCreateTimeLapse", sender: self)
     }
     
     // Hide status bar
@@ -154,13 +159,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         // Navigation bar customization
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.toolbar.tintColor = UIColor.black
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        
         let videoCount = getVideoCount()
         videoLibrary.setTitle(String(videoCount), for: .normal)
-        super.viewWillAppear(animated)
+        
         cameraOutput = AVCapturePhotoOutput()
         
         
@@ -169,7 +172,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         session = AVCaptureSession()
         
         /*For video
-        session?.sessionPreset = AVCaptureSessionPresetHigh*/
+         session?.sessionPreset = AVCaptureSessionPresetHigh*/
         backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         var error: NSError?
@@ -198,14 +201,20 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         previewView.layer.addSublayer(videoPreviewLayer!)
         session!.startRunning()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         super.viewWillDisappear(animated)
-        
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -444,7 +453,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                 // remove images for memory
                 print("Remove images")
                 self.removeImages()
-                
+                self.saveVideoURL(url: String(describing: url))
                 // update video number in link to video library
                 DispatchQueue.main.async {
                     let videoCount = self.getVideoCount()
@@ -527,7 +536,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                             
                             print("URL : ", localVideoUrl)
                             //completionHandler(responseURL : localVideoUrl)
-                            
+                            self.saveVideoURL(url: String(describing: localVideoUrl))
                             /* let player = AVPlayer(url: localVideoUrl as URL)
                             let playerViewController = AVPlayerViewController()
                             playerViewController.player = player
@@ -545,5 +554,50 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                 print("error")
             }
         })
+    }
+    
+    func saveVideoURL(url: String) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        print("url : ", url)
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Video",
+                                       in: managedContext)!
+        
+        let video = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        video.setValue(url, forKeyPath: "url")
+        
+        do {
+            try managedContext.save()
+            videoURL.append(video)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func getVideoURL() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Video")
+        
+        do {
+            videoURL = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
 }

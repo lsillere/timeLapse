@@ -405,11 +405,12 @@
                         <outlet property="stopButton" destination="lu5-35-p4N" id="pJb-wy-Bo6"/>
                         <outlet property="timeProgressLabel" destination="YTy-vp-3Vl" id="i2I-Bi-Mr7"/>
                         <outlet property="videoLibrary" destination="wZy-RK-eax" id="kOr-hZ-wLs"/>
+                        <segue destination="i0k-oq-iiu" kind="show" identifier="goToCreateTimeLapse" id="RV8-3u-Aht"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpP-Ye-tkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2743" y="36"/>
+            <point key="canvasLocation" x="2741.5999999999999" y="35.532233883058474"/>
         </scene>
         <!--Video List Collection View Controller-->
         <scene sceneID="QUM-qY-1sw">
@@ -484,6 +485,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fT3-Ch-1af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2742" y="758"/>
+        </scene>
+        <!--Create Time Lapse View Controller-->
+        <scene sceneID="M91-cp-hzX">
+            <objects>
+                <viewController id="i0k-oq-iiu" customClass="CreateTimeLapseViewController" customModule="timeLapse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PEc-9F-mKI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zkf-vn-6xB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NFR-mK-3bs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B1x-WQ-uk2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-aG-3RO">
+                                <rect key="frame" x="299" y="84" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.52941176470588236" green="0.73333333333333328" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="fSR-9F-Pwn"/>
+                                    <constraint firstAttribute="height" constant="40" id="zxU-pw-KGo"/>
+                                </constraints>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="8Jz-2B-OAG" kind="show" id="qxJ-V6-eOP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video sauvegardée" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tj-LA-EJT">
+                                <rect key="frame" x="114" y="323" width="147" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="qMK-9v-7JM">
+                                <rect key="frame" x="154" y="296" width="67" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="B1x-WQ-uk2" firstAttribute="top" secondItem="NFR-mK-3bs" secondAttribute="top" id="4EP-D1-Cb3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GBp-aG-3RO" secondAttribute="trailing" constant="20" id="5M5-8Y-ule"/>
+                            <constraint firstItem="GBp-aG-3RO" firstAttribute="top" secondItem="PEc-9F-mKI" secondAttribute="bottom" constant="20" id="5Nv-93-mdN"/>
+                            <constraint firstItem="B1x-WQ-uk2" firstAttribute="leading" secondItem="NFR-mK-3bs" secondAttribute="leading" id="OPI-bt-Xhw"/>
+                            <constraint firstItem="Zkf-vn-6xB" firstAttribute="top" secondItem="B1x-WQ-uk2" secondAttribute="bottom" id="UVA-Mm-9f2"/>
+                            <constraint firstAttribute="trailing" secondItem="B1x-WQ-uk2" secondAttribute="trailing" id="qN1-rD-ZPT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bgImage" destination="B1x-WQ-uk2" id="LhA-bL-M1E"/>
+                        <outlet property="successPico" destination="qMK-9v-7JM" id="hAV-zN-s3E"/>
+                        <outlet property="sucesssVideoSaveLabel" destination="5Tj-LA-EJT" id="G8k-mT-XJ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOF-bo-RCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3718" y="758"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Jgl-0L-nSt">
@@ -580,8 +645,10 @@
         <image name="ico-play" width="80" height="80"/>
         <image name="ico-setting" width="40" height="40"/>
         <image name="ico-stop" width="80" height="80"/>
+        <image name="success" width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="qxJ-V6-eOP"/>
         <segue reference="2XL-b1-6Q4"/>
     </inferredMetricsTieBreakers>
 </document>
