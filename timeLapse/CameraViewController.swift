@@ -112,6 +112,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.performSegue(withIdentifier: "goToCreateTimeLapse", sender: self)
     }
     
+    @IBAction func unwindToCameraViewController(sender: UIStoryboardSegue) { }
+
+    
     // Hide status bar
     override var prefersStatusBarHidden: Bool {
         return true

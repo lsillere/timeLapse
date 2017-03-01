@@ -418,7 +418,7 @@
                         <outlet property="stopButton" destination="lu5-35-p4N" id="pJb-wy-Bo6"/>
                         <outlet property="timeProgressLabel" destination="YTy-vp-3Vl" id="i2I-Bi-Mr7"/>
                         <outlet property="videoLibrary" destination="wZy-RK-eax" id="kOr-hZ-wLs"/>
-                        <segue destination="i0k-oq-iiu" kind="show" identifier="goToCreateTimeLapse" id="RV8-3u-Aht"/>
+                        <segue destination="i0k-oq-iiu" kind="presentation" identifier="goToCreateTimeLapse" modalTransitionStyle="coverVertical" id="RV8-3u-Aht"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpP-Ye-tkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -528,10 +528,10 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="8Jz-2B-OAG" kind="show" id="qxJ-V6-eOP"/>
+                                    <segue destination="n3A-MN-xZL" kind="unwind" unwindAction="unwindToCameraViewControllerWithSender:" id="2Gw-ua-HMe"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video sauvegardée" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tj-LA-EJT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video sauvegardée" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tj-LA-EJT">
                                 <rect key="frame" x="114" y="323" width="147" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -571,6 +571,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOF-bo-RCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="n3A-MN-xZL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3717.5999999999999" y="757.87106446776613"/>
         </scene>
@@ -672,7 +673,6 @@
         <image name="success" width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kME-fI-5TG"/>
         <segue reference="2XL-b1-6Q4"/>
     </inferredMetricsTieBreakers>
 </document>

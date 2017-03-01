@@ -145,7 +145,7 @@ class CreateTimeLapseViewController: UIViewController {
         let photoPath = getPhotosPath()
         buildTimeLapse(photoPath: photoPath)
     }
-    
+        
     func getPhotosPath() -> [String] {
         var contentsPath = [String]()
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
