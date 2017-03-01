@@ -43,6 +43,7 @@ class CreateTimeLapseViewController: UIViewController {
     @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var sucesssVideoSaveLabel: UILabel!
     @IBOutlet weak var successPico: UIImageView!
+    @IBOutlet weak var retakeTimeLapseButton: UIButton!
     
     let progressLine = CAShapeLayer()
     let settings = Settings()
@@ -64,6 +65,7 @@ class CreateTimeLapseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let photoPath = getPhotosPath()
+        
         // Do any additional setup after loading the view.
         sucesssVideoSaveLabel.translatesAutoresizingMaskIntoConstraints = true
         screenSize = bgImage.bounds.size
@@ -134,6 +136,14 @@ class CreateTimeLapseViewController: UIViewController {
         updateElementPositionForDeviceOrienration()
         //bgImage.blur()
 
+    }
+    
+    @IBAction func recreateTimeLapse(_ sender: UIButton) {
+        
+        retakeTimeLapseButton.isHidden = true
+        successPico.isHidden = true
+        let photoPath = getPhotosPath()
+        buildTimeLapse(photoPath: photoPath)
     }
     
     func getPhotosPath() -> [String] {
@@ -210,13 +220,18 @@ class CreateTimeLapseViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.successPico.isHidden = false
+                    self.successPico.image = UIImage(named: "success")
+                    self.sucesssVideoSaveLabel.isHidden = false
                 }
         },
             failure: { error in
                 NSLog("failure: \(error)")
-                /*dispatch_async(dispatch_get_main_queue(), {
-                 progressHUD.dismiss()
-                 })*/
+                print("error")
+                DispatchQueue.main.async {
+                    self.successPico.isHidden = false
+                    self.successPico.image = UIImage(named: "cross")
+                    self.retakeTimeLapseButton.isHidden = false
+                }
         }
         )
     }
@@ -257,6 +272,10 @@ class CreateTimeLapseViewController: UIViewController {
                                        y: (screenSize!.width/2) - 50 - sucesssVideoSaveLabel.frame.size.height / 2,
                                        width: successPico.frame.size.width,
                                        height: successPico.frame.size.height)
+            retakeTimeLapseButton.frame = CGRect(x: screenSize!.height/2 - sucesssVideoSaveLabel.frame.size.width/2,
+                                                 y: screenSize!.width / 2 + 50 + sucesssVideoSaveLabel.frame.size.height / 2 + 10,
+                                                 width: sucesssVideoSaveLabel.frame.size.width,
+                                                 height: sucesssVideoSaveLabel.frame.size.height)
             
         case UIImageOrientation.right, UIImageOrientation.rightMirrored :
             progressLine.position = CGPoint(x: (screenSize!.width/2) - 50.0,
@@ -269,7 +288,11 @@ class CreateTimeLapseViewController: UIViewController {
                                        y: (screenSize!.height/2) - 50 - sucesssVideoSaveLabel.frame.size.height / 2,
                                        width: successPico.frame.size.width,
                                        height: successPico.frame.size.height)
-        
+            retakeTimeLapseButton.frame = CGRect(x: screenSize!.width/2 - sucesssVideoSaveLabel.frame.size.width/2,
+                                                 y: (screenSize!.height/2) + 50 + sucesssVideoSaveLabel.frame.size.height / 2  + 10,
+                                                 width: sucesssVideoSaveLabel.frame.size.width,
+                                                 height: sucesssVideoSaveLabel.frame.size.height)
+            
         default:
             progressLine.position = CGPoint(x: (screenSize!.width/2) - 50.0,
                                             y: (screenSize!.height/2) - 50 - sucesssVideoSaveLabel.frame.size.height / 2 - 10)
@@ -281,6 +304,10 @@ class CreateTimeLapseViewController: UIViewController {
                                        y: (screenSize!.height/2) - 50 + sucesssVideoSaveLabel.frame.size.height / 2,
                                        width: successPico.frame.size.width,
                                        height: successPico.frame.size.height)
+            retakeTimeLapseButton.frame = CGRect(x: screenSize!.width/2 - sucesssVideoSaveLabel.frame.size.width/2,
+                                                 y: (screenSize!.height/2) + 50 + sucesssVideoSaveLabel.frame.size.height / 2  + 10,
+                                                 width: sucesssVideoSaveLabel.frame.size.width,
+                                                 height: sucesssVideoSaveLabel.frame.size.height)
         }
     }
     

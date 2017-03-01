@@ -29,7 +29,7 @@ class Settings {
             self.interval = interval
             print("Video interval : ", interval)
         } else {
-            self.interval = "1"
+            self.interval = "0.3"
         }
         
         self.videoNumber = defaults.integer(forKey: "videoNumber")

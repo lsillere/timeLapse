@@ -20,6 +20,7 @@ class VideoListCollectionViewController: UICollectionViewController {
     var directoryContents = [URL]()
     var cellSize: Int = 0
     var selectedVideos = [URL]()
+    var selectedVideosIndex = [IndexPath]()
     var edit:Bool = false
     
     @IBOutlet var videoCollectionView: UICollectionView!
@@ -61,6 +62,7 @@ class VideoListCollectionViewController: UICollectionViewController {
             edit = false
             if !selectedVideos.isEmpty {
                 selectedVideos = [URL]()
+                selectedVideosIndex = [IndexPath]()
                 print("remove selected photo")
                 deselectAllvideo()
             }
@@ -87,8 +89,9 @@ class VideoListCollectionViewController: UICollectionViewController {
             deselectAllvideo()
             
             directoryContents = getVideoUrl()
-            collectionView?.reloadData()
-            
+            //collectionView?.reloadData()
+            collectionView?.deleteItems(at: selectedVideosIndex)
+            selectedVideosIndex = [IndexPath]()
             self.navigationController?.setToolbarHidden(true, animated: false)
             editBarButton.title = "Edit"
         }
@@ -148,6 +151,7 @@ class VideoListCollectionViewController: UICollectionViewController {
             showAlert(title: "Saved !", message: "La vidéo a bien été sauvegardée")
                 // Clear selectVideoo list
             selectedVideos = [URL]()
+            selectedVideosIndex = [IndexPath]()
             
         
             
@@ -177,7 +181,8 @@ class VideoListCollectionViewController: UICollectionViewController {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        print("directory contents: ", directoryContents)
+        //print("directory contents: ", directoryContents)
+        
         return directoryContents
     }
 
@@ -213,16 +218,22 @@ class VideoListCollectionViewController: UICollectionViewController {
                                                       for: indexPath) as! VideoCell
         cell.backgroundColor = UIColor.white
         
-        let asset = AVURLAsset(url: directoryContents[indexPath.row], options: nil)
-        let imgGenerator = AVAssetImageGenerator(asset: asset)
-        do {
-            let thumbnailCgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-            let thumbnailUiImage = cropImage(image: UIImage(cgImage: thumbnailCgImage), size: cellSize)
-            cell.imageViewCell.image = thumbnailUiImage
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        
+        DispatchQueue.global(qos: .background).async {
+        
+            let asset = AVURLAsset(url: self.directoryContents[indexPath.row], options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            
+            do {
+                let thumbnailCgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let thumbnailUiImage = self.cropImage(image: UIImage(cgImage: thumbnailCgImage), size: self.cellSize)
+                DispatchQueue.main.async {
+                    cell.imageViewCell.image = thumbnailUiImage
+                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
         }
-
         return cell
     }
     
@@ -246,7 +257,6 @@ class VideoListCollectionViewController: UICollectionViewController {
     }
 
     
-    // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if(edit == true) {
             print(selectedVideos)
@@ -262,6 +272,7 @@ class VideoListCollectionViewController: UICollectionViewController {
                                  didSelectItemAt indexPath: IndexPath) {
         if(edit == true) {
             selectedVideos.append(directoryContents[indexPath.row])
+            selectedVideosIndex.append(indexPath)
             
             print(selectedVideos)
             print("select")
@@ -273,6 +284,9 @@ class VideoListCollectionViewController: UICollectionViewController {
         if(edit == true) {
             if let indexOfvideo = selectedVideos.index(of: directoryContents[indexPath.row]) {
                 selectedVideos.remove(at: indexOfvideo)
+            }
+            if let indexPathOfvideo = selectedVideosIndex.index(of: indexPath) {
+                selectedVideosIndex.remove(at: indexPathOfvideo)
             }
             
             print(selectedVideos)

@@ -110,7 +110,7 @@ class TimeLapseBuilder: NSObject {
         }
     }
     
-    func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: ((NSError) -> Void)) {
+    func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: @escaping ((NSError) -> Void)) {
         var error: NSError?
         
         do {
@@ -162,7 +162,7 @@ class TimeLapseBuilder: NSObject {
                                 code: kFailedToAppendPixelBufferError,
                                 userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
                             )
-                            print("error")
+                            print("error AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer")
                             
                             break
                         }
@@ -177,8 +177,11 @@ class TimeLapseBuilder: NSObject {
                     videoWriter.finishWriting {
                         if error == nil {
                             success(self.videoOutputURL)
+                        } else {
+                            if let error = error {
+                                failure(error)
+                            }
                         }
-                        
                         self.videoWriter = nil
                     }
                 }
@@ -188,10 +191,12 @@ class TimeLapseBuilder: NSObject {
                     code: kFailedToStartAssetWriterError,
                     userInfo: ["description": "AVAssetWriter failed to start writing"]
                 )
+                print("error AVAssetWriter failed to start writing")
             }
         }
         
         if let error = error {
+            
             failure(error)
         }
     }

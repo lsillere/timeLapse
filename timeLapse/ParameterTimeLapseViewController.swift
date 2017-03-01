@@ -63,11 +63,11 @@ class ParameterTimeLapseViewController: UIViewController/*, UITableViewDelegate,
     @IBAction func vitessSegmentedControll(_ sender: Any) {
         switch vitessSegmentedControll.selectedSegmentIndex {
         case 0:
-            settings.interval = "8"
-        case 1:
             settings.interval = "5"
-        case 2:
+        case 1:
             settings.interval = "1"
+        case 2:
+            settings.interval = "0.3"
         default:
             settings.interval = ""
         }
@@ -111,9 +111,9 @@ class ParameterTimeLapseViewController: UIViewController/*, UITableViewDelegate,
         }*/
         
         switch settings.interval {
-        case "5":
+        case "1":
             vitessSegmentedControll.selectedSegmentIndex = 1
-        case "8":
+        case "5":
             vitessSegmentedControll.selectedSegmentIndex = 0
         default:
             vitessSegmentedControll.selectedSegmentIndex = 2
