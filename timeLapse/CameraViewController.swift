@@ -215,10 +215,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
+    /*override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         super.viewWillDisappear(animated)
-    }
+    }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

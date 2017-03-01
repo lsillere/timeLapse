@@ -127,7 +127,12 @@ class ParameterTimeLapseViewController: UIViewController/*, UITableViewDelegate,
             vitessSegmentedControll.selectedSegmentIndex = 2
         }*/
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
