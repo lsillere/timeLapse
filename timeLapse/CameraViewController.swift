@@ -152,17 +152,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        videoLibrary.isHidden = false
+        
         print("VideoQuality \(settings.videoQuality)")
         print("Interval \(settings.interval)")
         
         // Navigation bar customization
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.toolbar.tintColor = UIColor.black
-        
-        
-        let videoCount = getVideoCount()
-        videoLibrary.setTitle(String(videoCount), for: .normal)
         
         cameraOutput = AVCapturePhotoOutput()
         
@@ -207,6 +203,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        let videoCount = getVideoCount()
+        if(videoCount > 0) {
+            videoLibrary.isHidden = false
+        }
+        videoLibrary.setTitle(String(videoCount), for: .normal)
     }
     
     
