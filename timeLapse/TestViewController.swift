@@ -60,8 +60,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let imageTest = UIImage(data: dataNew!)
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.image = imageTest
-        print("Width:", imageTest?.size.width)
-        print("Height:", imageTest?.size.height)
+        print("Width:", imageTest?.size.width as Any)
+        print("Height:", imageTest?.size.height as Any)
         /*switch imageTest?.imageOrientation {
         case UIImageOrientation.up:
             print("up")
@@ -343,7 +343,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         print("Video interval : ", interval)
         updateCounter()
-        timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: interval, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
     }
     
     func didStop(overlayView:CustomOverlayView) {

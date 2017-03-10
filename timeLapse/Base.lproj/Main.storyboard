@@ -441,7 +441,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="Xrf-TB-eCQ" customClass="VideoCell" customModule="timeLapse" customModuleProvider="target">
-                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -514,14 +514,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B1x-WQ-uk2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-aG-3RO">
-                                <rect key="frame" x="299" y="84" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.52941176470588236" green="0.73333333333333328" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-aG-3RO">
+                                <rect key="frame" x="299" y="40" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="fSR-9F-Pwn"/>
                                     <constraint firstAttribute="height" constant="40" id="zxU-pw-KGo"/>
                                 </constraints>
-                                <state key="normal" title="X">
+                                <state key="normal" title="X" image="ico-close">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -666,6 +665,7 @@
     </scenes>
     <resources>
         <image name="camera" width="30" height="30"/>
+        <image name="ico-close" width="40" height="40"/>
         <image name="ico-galery" width="40" height="40"/>
         <image name="ico-play" width="80" height="80"/>
         <image name="ico-setting" width="40" height="40"/>

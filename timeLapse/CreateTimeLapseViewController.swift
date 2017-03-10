@@ -259,7 +259,7 @@ class CreateTimeLapseViewController: UIViewController {
     
     func updateElementPositionForDeviceOrienration() {
         
-        print("screenSize: ", screenSize)
+        print("screenSize: ", screenSize as Any)
         switch orientation {
         case UIImageOrientation.up, UIImageOrientation.upMirrored :
             progressLine.position = CGPoint(x: (screenSize!.height/2) - 50.0,

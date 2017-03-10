@@ -26,7 +26,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var timerSecond = Timer()
     let settings = Settings()
     var timeLapseBuilder: TimeLapseBuilder?
-    var timerSubview = Timer()
+    var timerSubview:Timer?
     var videoName:[String] = []
     var orientation: UIImageOrientation = UIImageOrientation.right
     var startTime = Date()
@@ -62,7 +62,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             FileManager.default.createFile(atPath: photoPath, contents: dataImage, attributes: nil)
             numberPhotoTaken += 1
                         
-            UIImageWriteToSavedPhotosAlbum(UIImage(data: dataImage)!, nil, nil, nil)
+            //UIImageWriteToSavedPhotosAlbum(UIImage(data: dataImage)!, nil, nil, nil)
             print("Capture \(numberPhotoTaken)")
         }
     }
@@ -345,24 +345,21 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             device.unlockForConfiguration()
             
             /*------------------- Add imageview to show where focus is made ------------------- */
-            /*removeSubview()
+            removeSubview()
             var imageViewShow : UIImageView
             //print(" focusPoint : ", focusPoint, screenSize.width, screenSize.height)
             imageViewShow  = UIImageView(frame:CGRect(x: (1-focusPoint.y) * screenSize.width, y: focusPoint.x * screenSize.height, width: 60, height: 60))
-            imageViewShow.image = UIImage(named:"ico-galery.png")
+            imageViewShow.image = UIImage(named:"ico-focus.png")
             imageViewShow.tag = 1
             self.view.addSubview(imageViewShow)
-            timerSubview = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.removeSubview), userInfo: nil, repeats: true)*/
+            timerSubview?.invalidate()
+            timerSubview = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(CameraViewController.removeSubview), userInfo: nil, repeats: false)
         }
     }
     
     func removeSubview() {
-        timerSubview.invalidate()
-        
         if let viewWithTag = self.view.viewWithTag(1) {
             viewWithTag.removeFromSuperview()
-        } else {
-            print("View doesn't exist")
         }
     }
     
@@ -384,11 +381,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     func saveVideoName(value: [String], key: String) {
         let defaults: UserDefaults = UserDefaults.standard
         
-        do {
-            try defaults.removeObject(forKey: key)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+        defaults.removeObject(forKey: key)
         
         defaults.set(value, forKey: key)
         defaults.synchronize()
